@@ -2,10 +2,10 @@ import {
   FETCH_SPORTS_REQUEST,
   FETCH_SPORTS_FULFILLED,
   FETCH_SPORTS_FAILED
-} from "../actions/actionTypes";
+} from '../actions/actionTypes';
 
 export const initialSportsState = {
-  sports: [{ id: 1, name: "Smth" }],
+  sports: [{ id: 1, name: 'Smth' }],
   error: null
 };
 
@@ -16,16 +16,18 @@ export const sports = (state = initialSportsState, action) => {
     case FETCH_SPORTS_FULFILLED:
       console.log(action.payload);
       return {
-        state,
+        ...state,
         sports: [...action.payload.tree]
       };
     case FETCH_SPORTS_FAILED:
       console.log(action.payload);
       return {
         ...state,
-        error: action.payload.error
+        sports: {
+          ...state.sports,
+          error: action.payload.error
+        }
       };
-
     default:
       return state;
   }

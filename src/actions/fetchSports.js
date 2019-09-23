@@ -1,24 +1,26 @@
-import { RSAA } from "redux-api-middleware";
+import { RSAA } from 'redux-api-middleware';
 import {
   FETCH_SPORTS_REQUEST,
   FETCH_SPORTS_FULFILLED,
   FETCH_SPORTS_FAILED
-} from "./actionTypes";
-import getSportEvents from "../selectors/getSportEvents";
-import { changeSportEvents } from "./changeSportEvents";
+} from './actionTypes';
+import parseData from '../utils/parseData';
+import getSportEvents from '../selectors/getSportEvents';
+import { changeSportEvents } from './changeSportEvents';
 
 export const fetchSports = currentSportId => {
   return {
     [RSAA]: {
       endpoint:
-        "https://test-gateway.virginbet.com/sportsbook/gateway/v1/web/categories?type=tree&categoryLevel=descendants",
-      method: "GET",
+        'https://test-gateway.virginbet.com/sportsbook/gateway/v1/web/categories?type=tree&categoryLevel=descendants',
+      method: 'GET',
       headers: {
-        "client-app-version": "1.2.17test",
-        "client-id": "web",
-        "client-language": "en",
-        "client-os-version": "default"
+        'client-app-version': '1.2.17test',
+        'client-id': 'web',
+        'client-language': 'en',
+        'client-os-version': 'default'
       },
+      //https://test-gateway.virginbet.com/sportsbook/gateway/v1/web/categories/SBTC1_3?type=tree&categoryLevel=childs&outright=false&specials=false
       types: [
         FETCH_SPORTS_REQUEST,
         {
@@ -33,10 +35,7 @@ export const fetchSports = currentSportId => {
             //       return response;
             //   }
             //   return null;
-            return res.text().then(json => ({
-              ...JSON.parse(json),
-              alive: true
-            }));
+            return parseData(res);
           }
         },
         FETCH_SPORTS_FAILED

@@ -5,40 +5,53 @@ import {
   mapProps,
   withHandlers,
   withState
-} from "recompose";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import SideMenu from "./SideMenu";
-import { fetchSports } from "../../actions/fetchSports";
-import { changeSportEvents } from "../../actions/changeSportEvents";
-import getSportEvents from "../../selectors/getSportEvents";
+} from 'recompose';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import SideMenu from './SideMenu';
+import { fetchSports } from '../../actions/fetchSports';
+import { changeSportEvents } from '../../actions/changeSportEvents';
+import { fetchLeagues } from '../../reducers/events';
 
-export const mapStateToProps = state => ({
-  sports: getSportEvents(state)
-});
+export const mapStateToProps = state => {
+  return {
+    // sports: getSportEvents(state)
+    sports: state.sports.sports
+  };
+};
 
 export const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       dispatchFetchSports: fetchSports,
-      dispatchChangeSportEvents: changeSportEvents
+      dispatchChangeSportEvents: changeSportEvents,
+      fetchLeagues: fetchLeagues
     },
     dispatch
   );
 
+export const fetchData = function() {
+  const { dispatchFetchSports, currentSportId, fetchLeagues } = this.props;
+  dispatchFetchSports();
+  currentSportId && fetchLeagues(currentSportId);
+};
+
 export const fetchOnMount = {
   componentDidMount() {
     //const { dispatchFetchSports } = this.props;
-    console.log("Mounted");
+    console.log('Mounted');
     console.log(this);
     // console.log(dispatchFetchSports);
     // generate();
-    const { dispatchFetchSports, currentSportId, fetchLeagues } = this.props;
-    dispatchFetchSports();
-    currentSportId && fetchLeagues(this.props.currentSportId);
+    // const { dispatchFetchSports, currentSportId, fetchLeagues } = this.props;
+    const fetchDataBind = fetchData.bind(this);
+    // dispatchFetchSports();
+    // currentSportId && fetchLeagues(currentSportId);
+    fetchDataBind();
     setInterval(() => {
-      dispatchFetchSports();
-      currentSportId && fetchLeagues(this.props.currentSportId);
+      fetchDataBind();
+      // dispatchFetchSports();
+      // currentSportId && fetchLeagues(currentSportId);
       // console.log(this.props.id);
       // if(this.props.currentSportId){
       //   const events = getSportEvents(this.props.sports.sports, this.props.currentSportId);
@@ -49,10 +62,10 @@ export const fetchOnMount = {
 };
 
 export const mapContainerProps = props => {
-  console.log(props);
+  console.log('Props are: ', props);
   return {
     ...props,
-    sports: props.sports.sports
+    sports: props.sports
   };
 };
 
@@ -70,15 +83,15 @@ export const handleShowEvents = {
 };
 
 export const enhance = compose(
-  setDisplayName("SideMenuContainer"),
+  setDisplayName('SideMenuContainer'),
   connect(
     mapStateToProps,
     mapDispatchToProps
   ),
-  withState("currentSportId", "setCurrentSportId", null),
+  withState('currentSportId', 'setCurrentSportId', null),
   lifecycle(fetchOnMount),
   mapProps(mapContainerProps),
-  withHandlers()
+  withHandlers(handleShowEvents)
 );
 
 export default enhance(SideMenu);
