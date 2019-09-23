@@ -1,9 +1,8 @@
 import { RSAA } from 'redux-api-middleware';
 import { List, fromJS } from 'immutable';
+import parseData from '../utils/parseData';
 
-const FETCH_LEAGUES = 'FETCH_LEAGUES';
-
-export const fetchLeagues = currentSportId => {
+export const fetchLeagues = (currentSportId, timestamp) => {
   return {
     [RSAA]: {
       endpoint: `https://test-gateway.virginbet.com/sportsbook/gateway/v1/web/categories/${currentSportId}?type=tree&categoryLevel=childs&outright=false&specials=false`,
@@ -16,7 +15,12 @@ export const fetchLeagues = currentSportId => {
       },
       types: [
         'FETCH_LEAGUES_REQUEST',
-        'FETCH_LEAGUES_SUCCESS',
+        {
+          type: 'FETCH_LEAGUES_SUCCESS',
+          payload: (response, state, res) => {
+            return parseData(res, timestamp);
+          }
+        },
         'FETCH_LEAGUES_FAILED'
       ]
     }

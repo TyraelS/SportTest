@@ -5,9 +5,8 @@ import {
   FETCH_SPORTS_FAILED
 } from './actionTypes';
 import parseData from '../utils/parseData';
-import { changeSportEvents } from './changeSportEvents';
 
-export const fetchSports = currentSportId => {
+export const fetchSports = timestamp => {
   return {
     [RSAA]: {
       endpoint:
@@ -25,16 +24,7 @@ export const fetchSports = currentSportId => {
         {
           type: FETCH_SPORTS_FULFILLED,
           payload: (response, state, res) => {
-            // if(currentSportId){
-            //   const events = getSportEvents(response.tree.sports, currentSportId);
-            //   changeSportEvents(events);
-            // }
-            // console.log(response);
-            //   if (true) {
-            //       return response;
-            //   }
-            //   return null;
-            return parseData(res);
+            return parseData(res, timestamp);
           }
         },
         FETCH_SPORTS_FAILED
@@ -42,39 +32,3 @@ export const fetchSports = currentSportId => {
     }
   };
 };
-
-// export const fetchSportsStart = () => {
-//     return {
-//         type: types.FETCH_SPORTS_START
-//     }
-// }
-// export const fetchSportsFulfilled = () => {
-//     return {
-//         type: types.FETCH_SPORTS_FULFILLED
-//     }
-// }
-// export const fetchSportsFailed = () => {
-//     return {
-//         type: types.FETCH_SPORT_FAILED
-//     }
-// }
-
-// export const fetchSports = () => {
-//     return dispatch => {
-//         dispatch(fetchSportsStart());
-//         const req = new XMLHttpRequest();
-//         req.open('GET', 'https://test-gateway.virginbet.com/sportsbook/gateway/v1/web/categories?type=tree&categoryLevel=descendants');
-//         const sports;
-//         req.onreadystatechange = function (aEvt) {
-//             if(req.status === 200){
-//                 sports = req.response;
-//                 console.log(sports);
-//                 dispatch(fetchSportsFulfilled());
-//             } else {
-//                 console.log('Error loading');
-//                 dispatch(fetchSportsFailed());
-//             }
-//         }
-
-//     }
-// }

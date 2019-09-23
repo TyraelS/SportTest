@@ -14,11 +14,11 @@ import { fetchSports } from '../../actions/fetchSports';
 import { changeSportEvents } from '../../actions/changeSportEvents';
 import { fetchLeagues } from '../../reducers/leagues';
 import getSports from '../../selectors/getSports';
+import generate from '../../utils/generateTimestamp';
 
 export const mapStateToProps = state => {
   console.log('Mapped state is: ', state);
   return {
-    // sports: getSportEvents(state)
     sports: getSports(state)
   };
 };
@@ -35,31 +35,19 @@ export const mapDispatchToProps = dispatch =>
 
 export const fetchData = function() {
   const { dispatchFetchSports, currentSportId, fetchLeagues } = this.props;
-  dispatchFetchSports();
-  currentSportId && fetchLeagues(currentSportId);
+  const timestamp = generate();
+  dispatchFetchSports(timestamp);
+  currentSportId && fetchLeagues(currentSportId, timestamp);
 };
 
 export const fetchOnMount = {
   componentDidMount() {
-    //const { dispatchFetchSports } = this.props;
     console.log('Mounted');
     console.log(this);
-    // console.log(dispatchFetchSports);
-    // generate();
-    // const { dispatchFetchSports, currentSportId, fetchLeagues } = this.props;
     const fetchDataBind = fetchData.bind(this);
-    // dispatchFetchSports();
-    // currentSportId && fetchLeagues(currentSportId);
     fetchDataBind();
     setInterval(() => {
       fetchDataBind();
-      // dispatchFetchSports();
-      // currentSportId && fetchLeagues(currentSportId);
-      // console.log(this.props.id);
-      // if(this.props.currentSportId){
-      //   const events = getSportEvents(this.props.sports.sports, this.props.currentSportId);
-      //   this.props.dispatchChangeSportEvents(events);
-      // }
     }, 30000);
   }
 };
@@ -80,8 +68,6 @@ export const handleShowEvents = {
   }) => event => {
     setCurrentSportId(event.target.id);
     fetchLeagues(currentSportId);
-    // const events = getSportEvents(props.sports, event.target.id);
-    // props.dispatchChangeSportEvents(events);
   }
 };
 
@@ -92,6 +78,7 @@ export const enhance = compose(
     mapDispatchToProps
   ),
   withState('currentSportId', 'setCurrentSportId', null),
+  withState('timestamp', 'setTimestamp', generate()),
   lifecycle(fetchOnMount),
   mapProps(mapContainerProps),
   withHandlers(handleShowEvents),

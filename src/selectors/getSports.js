@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import { Map } from 'immutable';
 
 const getSports = createSelector(
   state => {

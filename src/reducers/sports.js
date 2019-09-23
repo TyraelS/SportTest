@@ -1,15 +1,5 @@
 import { FETCH_SPORTS_FULFILLED } from '../actions/actionTypes';
-import {
-  List,
-  fromJS,
-  Map,
-  mergeDeepWith,
-  mergeDeep,
-  updateIn,
-  merge,
-  mergeWith,
-  indexOf
-} from 'immutable';
+import { List, fromJS } from 'immutable';
 
 export const initialSportsState = List();
 
