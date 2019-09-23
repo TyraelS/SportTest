@@ -3,15 +3,14 @@ import './App.css';
 import { Provider } from 'react-redux';
 import store from './store';
 import SideMenu from './components/SideMenu';
-import EventsTab from './components/EventsTab';
-
+import LeaguesTab from './components/LeaguesTab';
 
 function App() {
   return (
-    <Provider store = {store}>
-      <div className="App">
+    <Provider store={store}>
+      <div className='App'>
         <SideMenu />
-        <EventsTab />
+        <LeaguesTab />
       </div>
     </Provider>
   );

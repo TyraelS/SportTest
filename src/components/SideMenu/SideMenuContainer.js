@@ -11,7 +11,7 @@ import { bindActionCreators } from 'redux';
 import SideMenu from './SideMenu';
 import { fetchSports } from '../../actions/fetchSports';
 import { changeSportEvents } from '../../actions/changeSportEvents';
-import { fetchLeagues } from '../../reducers/events';
+import { fetchLeagues } from '../../reducers/leagues';
 
 export const mapStateToProps = state => {
   return {

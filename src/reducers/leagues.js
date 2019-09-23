@@ -1,4 +1,3 @@
-import { CHANGE_SPORT_EVENTS } from '../actions/actionTypes';
 import { RSAA } from 'redux-api-middleware';
 import { List, fromJS } from 'immutable';
 
@@ -24,12 +23,12 @@ export const fetchLeagues = currentSportId => {
   };
 };
 
-export const initialEventsState = List();
+export const initialLeaguesState = List();
 
-export const events = (state = initialEventsState, action) => {
+export const leagues = (state = initialLeaguesState, action) => {
   switch (action.type) {
-    case CHANGE_SPORT_EVENTS:
-      return fromJS(action.payload);
+    case 'FETCH_LEAGUES_SUCCESS':
+      return fromJS(action.payload.category) || state;
     default:
       return state;
   }
