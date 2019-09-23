@@ -4,7 +4,8 @@ import {
   setDisplayName,
   mapProps,
   withHandlers,
-  withState
+  withState,
+  pure
 } from 'recompose';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -12,11 +13,13 @@ import SideMenu from './SideMenu';
 import { fetchSports } from '../../actions/fetchSports';
 import { changeSportEvents } from '../../actions/changeSportEvents';
 import { fetchLeagues } from '../../reducers/leagues';
+import getSports from '../../selectors/getSports';
 
 export const mapStateToProps = state => {
+  console.log('Mapped state is: ', state);
   return {
     // sports: getSportEvents(state)
-    sports: state.sports.sports
+    sports: getSports(state)
   };
 };
 
@@ -91,7 +94,8 @@ export const enhance = compose(
   withState('currentSportId', 'setCurrentSportId', null),
   lifecycle(fetchOnMount),
   mapProps(mapContainerProps),
-  withHandlers(handleShowEvents)
+  withHandlers(handleShowEvents),
+  pure
 );
 
 export default enhance(SideMenu);

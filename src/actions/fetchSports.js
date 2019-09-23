@@ -5,7 +5,6 @@ import {
   FETCH_SPORTS_FAILED
 } from './actionTypes';
 import parseData from '../utils/parseData';
-import getSportEvents from '../selectors/getSportEvents';
 import { changeSportEvents } from './changeSportEvents';
 
 export const fetchSports = currentSportId => {

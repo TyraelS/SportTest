@@ -1,9 +1,9 @@
-import { compose, setDisplayName } from 'recompose';
+import { compose, setDisplayName, pure } from 'recompose';
 import { connect } from 'react-redux';
 import LeaguesTab from './LeaguesTab';
 
 export const mapStateToProps = state => ({
-  leagues: state.leagues
+  leagues: state.get('leagues')
 });
 
 export const enhance = compose(
@@ -11,7 +11,8 @@ export const enhance = compose(
   connect(
     mapStateToProps,
     null
-  )
+  ),
+  pure
 );
 
 export default enhance(LeaguesTab);

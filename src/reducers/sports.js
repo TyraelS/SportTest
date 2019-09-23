@@ -1,33 +1,30 @@
+import { FETCH_SPORTS_FULFILLED } from '../actions/actionTypes';
 import {
-  FETCH_SPORTS_REQUEST,
-  FETCH_SPORTS_FULFILLED,
-  FETCH_SPORTS_FAILED
-} from '../actions/actionTypes';
+  List,
+  fromJS,
+  Map,
+  mergeDeepWith,
+  mergeDeep,
+  updateIn,
+  merge,
+  mergeWith,
+  indexOf
+} from 'immutable';
 
-export const initialSportsState = {
-  sports: [{ id: 1, name: 'Smth' }],
-  error: null
-};
+export const initialSportsState = List();
 
 export const sports = (state = initialSportsState, action) => {
   switch (action.type) {
-    case FETCH_SPORTS_REQUEST:
-      return state;
     case FETCH_SPORTS_FULFILLED:
       console.log(action.payload);
-      return {
-        ...state,
-        sports: [...action.payload.tree]
-      };
-    case FETCH_SPORTS_FAILED:
-      console.log(action.payload);
-      return {
-        ...state,
-        sports: {
-          ...state.sports,
-          error: action.payload.error
-        }
-      };
+      console.log('Smth:', state);
+      return fromJS(action.payload.tree);
+    // return mergeDeep(
+    //   state,
+    //   fromJS(action.payload.tree).map(item =>
+    //     Map({ id: item.get('id'), name: item.get('name') })
+    //   )
+    // );
     default:
       return state;
   }

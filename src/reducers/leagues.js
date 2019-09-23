@@ -28,7 +28,7 @@ export const initialLeaguesState = List();
 export const leagues = (state = initialLeaguesState, action) => {
   switch (action.type) {
     case 'FETCH_LEAGUES_SUCCESS':
-      return fromJS(action.payload.category) || state;
+      return fromJS(action.payload.category) || List();
     default:
       return state;
   }

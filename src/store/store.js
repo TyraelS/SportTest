@@ -1,7 +1,9 @@
-import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
+import { combineReducers } from 'redux-immutable';
 import thunkMiddleware from 'redux-thunk';
 import { apiMiddleware } from 'redux-api-middleware';
 
+import { Map } from 'immutable';
 import { sports, initialSportsState } from '../reducers/sports';
 import { leagues, initialLeaguesState } from '../reducers/leagues';
 
@@ -11,10 +13,10 @@ const enhancer = composeEnhancers(
   applyMiddleware(thunkMiddleware, apiMiddleware)
 );
 
-const initialStoreState = {
+const initialStoreState = Map({
   sports: initialSportsState,
   leagues: initialLeaguesState
-};
+});
 
 export const store = createStore(
   combineReducers({
