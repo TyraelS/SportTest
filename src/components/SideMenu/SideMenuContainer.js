@@ -11,10 +11,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import SideMenu from './SideMenu';
 import { fetchSports } from '../../actions/fetchSports';
-import { changeSportEvents } from '../../actions/changeSportEvents';
 import { fetchLeagues } from '../../reducers/leagues';
 import getSports from '../../selectors/getSports';
 import generate from '../../utils/generateTimestamp';
+import {
+  setSportsTimestamp,
+  setLeaguesTimestamp
+} from '../../reducers/timestamps';
 
 export const mapStateToProps = state => {
   console.log('Mapped state is: ', state);
@@ -27,15 +30,24 @@ export const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       dispatchFetchSports: fetchSports,
-      dispatchChangeSportEvents: changeSportEvents,
-      fetchLeagues: fetchLeagues
+      fetchLeagues: fetchLeagues,
+      setSportsTimestamp: setSportsTimestamp,
+      setLeaguesTimestamp: setLeaguesTimestamp
     },
     dispatch
   );
 
 export const fetchData = function() {
-  const { dispatchFetchSports, currentSportId, fetchLeagues } = this.props;
+  const {
+    dispatchFetchSports,
+    currentSportId,
+    fetchLeagues,
+    setSportsTimestamp,
+    setLeaguesTimestamp
+  } = this.props;
   const timestamp = generate();
+  setSportsTimestamp(timestamp);
+  setLeaguesTimestamp(timestamp);
   dispatchFetchSports(timestamp);
   currentSportId && fetchLeagues(currentSportId, timestamp);
 };
@@ -64,10 +76,15 @@ export const handleShowEvents = {
   handleShowEvents: ({
     setCurrentSportId,
     fetchLeagues,
+    setLeaguesTimestamp,
     currentSportId
   }) => event => {
+    console.log('Target ID is:', event.target.id);
     setCurrentSportId(event.target.id);
-    fetchLeagues(currentSportId);
+    console.log('SportID is:', currentSportId);
+    const timestamp = generate();
+    setLeaguesTimestamp(timestamp);
+    fetchLeagues(event.target.id, timestamp);
   }
 };
 
@@ -78,7 +95,6 @@ export const enhance = compose(
     mapDispatchToProps
   ),
   withState('currentSportId', 'setCurrentSportId', null),
-  withState('timestamp', 'setTimestamp', generate()),
   lifecycle(fetchOnMount),
   mapProps(mapContainerProps),
   withHandlers(handleShowEvents),

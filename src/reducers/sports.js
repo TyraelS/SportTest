@@ -6,9 +6,12 @@ export const initialSportsState = List();
 export const sports = (state = initialSportsState, action) => {
   switch (action.type) {
     case FETCH_SPORTS_FULFILLED:
-      console.log(action.payload);
       console.log('Smth:', state);
-      return fromJS(action.payload.tree);
+      console.log('Whaaat:', action);
+      if (action.payload.alive) {
+        return fromJS(action.payload.tree);
+      }
+      return state;
     // return mergeDeep(
     //   state,
     //   fromJS(action.payload.tree).map(item =>

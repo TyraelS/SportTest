@@ -1,8 +1,7 @@
-const parseData = (res, timestamp) => {
-  console.log(timestamp);
+const parseData = (res, alive) => {
   return res.text().then(json => ({
     ...JSON.parse(json),
-    timestamp: timestamp
+    alive: alive
   }));
 };
 

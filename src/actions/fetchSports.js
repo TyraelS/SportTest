@@ -5,6 +5,8 @@ import {
   FETCH_SPORTS_FAILED
 } from './actionTypes';
 import parseData from '../utils/parseData';
+import getHeaders from '../utils/getHeaders';
+import checkTimestamps from '../utils/checkTimestamp';
 
 export const fetchSports = timestamp => {
   return {
@@ -12,19 +14,18 @@ export const fetchSports = timestamp => {
       endpoint:
         'https://test-gateway.virginbet.com/sportsbook/gateway/v1/web/categories?type=tree&categoryLevel=descendants',
       method: 'GET',
-      headers: {
-        'client-app-version': '1.2.17test',
-        'client-id': 'web',
-        'client-language': 'en',
-        'client-os-version': 'default'
-      },
+      headers: getHeaders(),
       //https://test-gateway.virginbet.com/sportsbook/gateway/v1/web/categories/SBTC1_3?type=tree&categoryLevel=childs&outright=false&specials=false
       types: [
         FETCH_SPORTS_REQUEST,
         {
           type: FETCH_SPORTS_FULFILLED,
           payload: (response, state, res) => {
-            return parseData(res, timestamp);
+            const alive = checkTimestamps(
+              state.get('timestamps').get('sports'),
+              timestamp
+            );
+            return parseData(res, alive);
           }
         },
         FETCH_SPORTS_FAILED
