@@ -4,17 +4,26 @@ import SideMenuItem from '../SideMenuItem/';
 
 const displayName = 'SideMenu';
 
-export default function SideMenu({ sports, handleShowEvents }) {
+export default function SideMenu({ sports, handleShowEvents, currentSportId }) {
   console.log('Current props:', sports.toJS());
   return (
     <SideMenuStyle>
       render time = {new Date().toLocaleTimeString()}
       {sports
-        ? sports.map(item => (
-            <SideMenuItem key={item.id} id={item.id} onClick={handleShowEvents}>
-              {item.name}
-            </SideMenuItem>
-          ))
+        ? sports.map(item => {
+            let active = false;
+            if (item.id === currentSportId) active = true;
+            return (
+              <SideMenuItem
+                key={item.id}
+                id={item.id}
+                onClick={handleShowEvents}
+                active={active}
+              >
+                {item.name}
+              </SideMenuItem>
+            );
+          })
         : 'Smth went wrong'}
     </SideMenuStyle>
   );

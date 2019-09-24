@@ -1,3 +1,3 @@
-import SideMenuItem from './SideMenuItem';
+import SideMenuItemContainer from './SideMenuItemContainer';
 
-export default SideMenuItem;
+export default SideMenuItemContainer;

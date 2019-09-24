@@ -1,5 +1,5 @@
 import { FETCH_SPORTS_FULFILLED } from '../actions/actionTypes';
-import { List, fromJS } from 'immutable';
+import { List, fromJS, mergeWith } from 'immutable';
 
 export const initialSportsState = List();
 
@@ -9,7 +9,12 @@ export const sports = (state = initialSportsState, action) => {
       console.log('Smth:', state);
       console.log('Whaaat:', action);
       if (action.payload.alive) {
-        return fromJS(action.payload.tree);
+        // mergeData
+        const newData = fromJS(action.payload.tree);
+        // if (state.size !== 0) {
+
+        // }
+        return newData;
       }
       return state;
     // return mergeDeep(
