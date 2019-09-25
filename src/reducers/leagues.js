@@ -17,7 +17,7 @@ export const fetchLeagues = (currentSportId, timestamp) => {
           type: 'FETCH_LEAGUES_SUCCESS',
           payload: (response, state, res) => {
             const alive = checkTimestamps(
-              state.get('timestamps').get('sports'),
+              state.get('responses').get('sports'),
               timestamp
             );
             return parseData(res, alive);

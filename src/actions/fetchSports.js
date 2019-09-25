@@ -22,7 +22,7 @@ export const fetchSports = timestamp => {
           type: FETCH_SPORTS_FULFILLED,
           payload: (response, state, res) => {
             const alive = checkTimestamps(
-              state.get('timestamps').get('sports'),
+              state.get('responses').get('sports'),
               timestamp
             );
             return parseData(res, alive);
