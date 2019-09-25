@@ -8,12 +8,8 @@ export const initialSportsState = Map();
 export const sports = (state = initialSportsState, action) => {
   switch (action.type) {
     case FETCH_SPORTS_FULFILLED:
-      console.log('Smth:', state);
-      console.log('Whaaat:', action);
       if (!action.payload.alive) return state;
-      // mergeData
       const newData = convertData(action.payload.tree);
-      console.log('Something:', newData);
       if (state.size === 0) return newData;
       return mergeData(state, newData);
     default:

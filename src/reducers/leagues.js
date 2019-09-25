@@ -35,9 +35,7 @@ export const leagues = (state = initialLeaguesState, action) => {
   switch (action.type) {
     case 'FETCH_LEAGUES_SUCCESS':
       if (!action.payload.alive) return state;
-      // mergeData
       const newData = convertData(action.payload.category);
-      console.log('Something:', newData);
       return newData;
     default:
       return state;
