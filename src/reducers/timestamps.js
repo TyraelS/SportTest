@@ -22,7 +22,6 @@ export const initialTimestampsState = Map({
 export const timestamps = (state = initialTimestampsState, action) => {
   switch (action.type) {
     case 'SET_SPORTS_TIMESTAMP':
-      console.log('Timestamp is:', action.payload);
       return set(state, 'sports', action.payload);
     case 'SET_LEAGUES_TIMESTAMP':
       return set(state, 'leagues', action.payload);

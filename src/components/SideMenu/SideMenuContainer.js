@@ -55,7 +55,6 @@ export const fetchData = function() {
 export const fetchOnMount = {
   componentDidMount() {
     console.log('Mounted');
-    console.log(this);
     const fetchDataBind = fetchData.bind(this);
     fetchDataBind();
     setInterval(() => {

@@ -5,22 +5,22 @@ import SideMenuItem from '../SideMenuItem/';
 const displayName = 'SideMenu';
 
 export default function SideMenu({ sports, handleShowEvents, currentSportId }) {
-  console.log('Current props:', sports.toJS());
+  const items = sports.toJS();
   return (
     <SideMenuStyle>
       render time = {new Date().toLocaleTimeString()}
       {sports
-        ? sports.map(item => {
+        ? Object.keys(items).map(key => {
             let active = false;
-            if (item.id === currentSportId) active = true;
+            if (items[key].id === currentSportId) active = true;
             return (
               <SideMenuItem
-                key={item.id}
-                id={item.id}
+                key={items[key].id}
+                id={items[key].id}
                 onClick={handleShowEvents}
                 active={active}
               >
-                {item.name}
+                {items[key].name}
               </SideMenuItem>
             );
           })

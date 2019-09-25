@@ -1,7 +1,7 @@
 import { FETCH_SPORTS_FULFILLED } from '../actions/actionTypes';
-import { List, fromJS, mergeWith } from 'immutable';
+import { fromJS, Map } from 'immutable';
 
-export const initialSportsState = List();
+export const initialSportsState = Map();
 
 export const sports = (state = initialSportsState, action) => {
   switch (action.type) {
@@ -11,18 +11,21 @@ export const sports = (state = initialSportsState, action) => {
       if (action.payload.alive) {
         // mergeData
         const newData = fromJS(action.payload.tree);
-        // if (state.size !== 0) {
-
-        // }
-        return newData;
+        const y = Map(newData.map(item => [item.get('id'), item]));
+        console.log('Something:', y);
+        if (state.size !== 0) {
+          return state.mergeWith((oldVal, newVal) => {
+            if (
+              parseInt(oldVal.get('version')) < parseInt(newVal.get('version'))
+            )
+              return newVal;
+            else return oldVal;
+          }, y);
+        }
+        return y;
       }
       return state;
-    // return mergeDeep(
-    //   state,
-    //   fromJS(action.payload.tree).map(item =>
-    //     Map({ id: item.get('id'), name: item.get('name') })
-    //   )
-    // );
+    // Map(list.map(item => [item.id, item]));
     default:
       return state;
   }
