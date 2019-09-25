@@ -38,7 +38,6 @@ export const leagues = (state = initialLeaguesState, action) => {
       if (!action.payload.alive) return state;
       const newData = convertNativeToMap(action.payload.category);
       return mergeData(state, newData);
-    // return newData;
     default:
       return state;
   }

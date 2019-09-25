@@ -54,7 +54,6 @@ export const fetchData = function() {
 
 export const fetchOnMount = {
   componentDidMount() {
-    console.log('Mounted');
     const fetchDataBind = fetchData.bind(this);
     fetchDataBind();
     setInterval(() => {
@@ -64,7 +63,6 @@ export const fetchOnMount = {
 };
 
 export const mapContainerProps = props => {
-  console.log('Props are: ', props);
   return {
     ...props,
     sports: props.sports
@@ -78,9 +76,7 @@ export const handleShowEvents = {
     setLeaguesTimestamp,
     currentSportId
   }) => event => {
-    console.log('Target ID is:', event.target.id);
     setCurrentSportId(event.target.id);
-    console.log('SportID is:', currentSportId);
     const timestamp = generate();
     setLeaguesTimestamp(timestamp);
     fetchLeagues(event.target.id, timestamp);

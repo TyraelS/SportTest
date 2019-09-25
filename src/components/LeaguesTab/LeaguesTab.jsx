@@ -6,7 +6,6 @@ import LeaguesTabItem from '../LeaguesTabItem';
 const displayName = 'LeaguesTab';
 
 export default function LeaguesTab({ leagues }) {
-  console.log('Leagues are:', leagues);
   const items = leagues.toJS();
   return (
     <LeaguesTabStyle>
