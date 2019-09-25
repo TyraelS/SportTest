@@ -17,7 +17,7 @@ import generate from '../../utils/generateTimestamp';
 import {
   setSportsTimestamp,
   setLeaguesTimestamp
-} from '../../reducers/timestamps';
+} from '../../reducers/responses';
 
 export const mapStateToProps = state => {
   console.log('Mapped state is: ', state);

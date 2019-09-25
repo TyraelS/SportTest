@@ -1,8 +1,9 @@
 import { RSAA } from 'redux-api-middleware';
-import { List, fromJS } from 'immutable';
+import { Map } from 'immutable';
 import parseData from '../utils/parseData';
 import getHeaders from '../utils/getHeaders';
 import checkTimestamps from '../utils/checkTimestamp';
+import convertData from '../utils/convertData';
 
 export const fetchLeagues = (currentSportId, timestamp) => {
   return {
@@ -28,15 +29,16 @@ export const fetchLeagues = (currentSportId, timestamp) => {
   };
 };
 
-export const initialLeaguesState = List();
+export const initialLeaguesState = Map();
 
 export const leagues = (state = initialLeaguesState, action) => {
   switch (action.type) {
     case 'FETCH_LEAGUES_SUCCESS':
-      if (action.payload.alive) {
-        return fromJS(action.payload.category);
-      }
-      return state;
+      if (!action.payload.alive) return state;
+      // mergeData
+      const newData = convertData(action.payload.category);
+      console.log('Something:', newData);
+      return newData;
     default:
       return state;
   }

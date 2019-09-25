@@ -7,15 +7,16 @@ const displayName = 'LeaguesTab';
 
 export default function LeaguesTab({ leagues }) {
   console.log('Leagues are:', leagues);
+  const items = leagues.toJS();
   return (
     <LeaguesTabStyle>
-      {leagues.toJS().map(item => (
+      {Object.keys(items).map(key => (
         <LeaguesTabItem
-          key={item.id}
-          name={item.name}
-          country={item.countryCode}
+          key={items[key].id}
+          name={items[key].name}
+          country={items[key].countryCode}
         >
-          {item.name}
+          {items[key].name}
         </LeaguesTabItem>
       ))}
     </LeaguesTabStyle>

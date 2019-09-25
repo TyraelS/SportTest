@@ -14,12 +14,12 @@ export const setLeaguesTimestamp = timestamp => {
   };
 };
 
-export const initialTimestampsState = Map({
+export const initialResponsesState = Map({
   sports: null,
   leagues: null
 });
 
-export const timestamps = (state = initialTimestampsState, action) => {
+export const responses = (state = initialResponsesState, action) => {
   switch (action.type) {
     case 'SET_SPORTS_TIMESTAMP':
       return set(state, 'sports', action.payload);
