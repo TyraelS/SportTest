@@ -3,12 +3,13 @@ import { Map } from 'immutable';
 import parseData from '../utils/parseData';
 import getHeaders from '../utils/getHeaders';
 import checkTimestamps from '../utils/checkTimestamp';
-import convertData from '../utils/convertData';
+import convertNativeToMap from '../utils/convertData';
+import mergeData from '../utils/mergeData';
 
 export const fetchLeagues = (currentSportId, timestamp) => {
   return {
     [RSAA]: {
-      endpoint: `https://test-gateway.virginbet.com/sportsbook/gateway/v1/web/categories/${currentSportId}?type=tree&categoryLevel=childs&outright=false&specials=false`,
+      endpoint: `https://gateway.virginbet.com/sportsbook/gateway/v1/web/categories/${currentSportId}?type=tree&categoryLevel=childs&outright=false&specials=false`,
       method: 'GET',
       headers: getHeaders(),
       types: [
@@ -35,8 +36,9 @@ export const leagues = (state = initialLeaguesState, action) => {
   switch (action.type) {
     case 'FETCH_LEAGUES_SUCCESS':
       if (!action.payload.alive) return state;
-      const newData = convertData(action.payload.category);
-      return newData;
+      const newData = convertNativeToMap(action.payload.category);
+      return mergeData(state, newData);
+    // return newData;
     default:
       return state;
   }

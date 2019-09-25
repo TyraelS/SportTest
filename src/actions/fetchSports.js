@@ -12,7 +12,7 @@ export const fetchSports = timestamp => {
   return {
     [RSAA]: {
       endpoint:
-        'https://test-gateway.virginbet.com/sportsbook/gateway/v1/web/categories?type=tree&categoryLevel=descendants',
+        'https://gateway.virginbet.com/sportsbook/gateway/v1/web/categories?type=tree&categoryLevel=descendants',
       method: 'GET',
       headers: getHeaders(),
       //https://test-gateway.virginbet.com/sportsbook/gateway/v1/web/categories/SBTC1_3?type=tree&categoryLevel=childs&outright=false&specials=false

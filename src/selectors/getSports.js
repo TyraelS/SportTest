@@ -1,16 +1,21 @@
 import { createSelector } from 'reselect';
+import { Map } from 'immutable';
 
-const getSports = createSelector(
-  state => {
-    console.log(state);
-    return state.get('sports').map(item => {
-      return {
-        id: item.get('id'),
-        name: item.get('name')
-      };
+const getSports = state => state.get('sports', Map());
+const getLeagues = state => state.get('leagues', Map());
+
+const getSportsWithCounters = createSelector(
+  [getSports, getLeagues],
+  (sports, leagues) => {
+    const sportsWithCounters = sports.map((item, key) => {
+      const sportId = item.get('sportId', '');
+      const counter = leagues.filter(
+        league => league.get('sportId', '') === sportId
+      ).size;
+      return item.set('counter', counter);
     });
-  },
-  items => items
+    return sportsWithCounters;
+  }
 );
 
-export default getSports;
+export default getSportsWithCounters;

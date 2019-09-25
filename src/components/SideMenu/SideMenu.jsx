@@ -20,7 +20,7 @@ export default function SideMenu({ sports, handleShowEvents, currentSportId }) {
                 onClick={handleShowEvents}
                 active={active}
               >
-                {items[key].name}
+                {items[key].name} - {items[key].counter}
               </SideMenuItem>
             );
           })

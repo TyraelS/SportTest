@@ -9,20 +9,20 @@ import {
 } from 'recompose';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
 import SideMenu from './SideMenu';
 import { fetchSports } from '../../actions/fetchSports';
 import { fetchLeagues } from '../../reducers/leagues';
-import getSports from '../../selectors/getSports';
 import generate from '../../utils/generateTimestamp';
 import {
   setSportsTimestamp,
   setLeaguesTimestamp
 } from '../../reducers/responses';
+import getSportsWithCounters from '../../selectors/getSports';
 
 export const mapStateToProps = state => {
-  console.log('Mapped state is: ', state);
   return {
-    sports: getSports(state)
+    sports: getSportsWithCounters(state)
   };
 };
 

@@ -1,5 +1,5 @@
-import { Map, fromJS } from 'immutable';
+import { Map } from 'immutable';
 
-export default function convertData(data) {
-  return Map(fromJS(data).map(item => [item.get('id'), item]));
+export default function convertNativeToMap(data) {
+  return Map(data.map(item => [item.id, Map(item)]));
 }
