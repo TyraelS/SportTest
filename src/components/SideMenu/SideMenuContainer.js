@@ -2,7 +2,6 @@ import {
   compose,
   lifecycle,
   setDisplayName,
-  mapProps,
   withHandlers,
   withState,
   pure
@@ -62,19 +61,11 @@ export const fetchOnMount = {
   }
 };
 
-export const mapContainerProps = props => {
-  return {
-    ...props,
-    sports: props.sports
-  };
-};
-
 export const handleShowEvents = {
   handleShowEvents: ({
     setCurrentSportId,
     fetchLeagues,
-    setLeaguesTimestamp,
-    currentSportId
+    setLeaguesTimestamp
   }) => event => {
     setCurrentSportId(event.target.id);
     const timestamp = generate();
@@ -91,7 +82,6 @@ export const enhance = compose(
   ),
   withState('currentSportId', 'setCurrentSportId', null),
   lifecycle(fetchOnMount),
-  mapProps(mapContainerProps),
   withHandlers(handleShowEvents),
   pure
 );

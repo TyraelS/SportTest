@@ -3,7 +3,7 @@ import { Map } from 'immutable';
 import parseData from '../utils/parseData';
 import getHeaders from '../utils/getHeaders';
 import checkTimestamps from '../utils/checkTimestamp';
-import convertNativeToMap from '../utils/convertData';
+import convertNativeToMap from '../utils/convertNativeToMap';
 import mergeData from '../utils/mergeData';
 
 export const fetchLeagues = (currentSportId, timestamp) => {

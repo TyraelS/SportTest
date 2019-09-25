@@ -1,6 +1,6 @@
 import { FETCH_SPORTS_FULFILLED } from '../actions/actionTypes';
 import { Map } from 'immutable';
-import convertNativeToMap from '../utils/convertData';
+import convertNativeToMap from '../utils/convertNativeToMap';
 import mergeData from '../utils/mergeData';
 
 export const initialSportsState = Map();
