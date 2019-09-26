@@ -19,7 +19,7 @@ export const fetchSports = timestamp => {
       types: [
         'FETCH_SPORTS_REQUEST',
         {
-          type: 'FETCH_SPORTS_FULFILLED',
+          type: 'FETCH_SPORTS_SUCCESS',
           payload: (response, state, res) => {
             const alive = checkTimestamp(
               state.get('responses').get('sports'),
@@ -38,7 +38,7 @@ export const initialSportsState = Map();
 
 export const sports = (state = initialSportsState, action = {}) => {
   switch (action.type) {
-    case 'FETCH_SPORTS_FULFILLED':
+    case 'FETCH_SPORTS_SUCCESS':
       if (!action.payload.alive) return state;
       const newData = convertNativeToMap(action.payload.tree);
       return mergeData(state, newData);
