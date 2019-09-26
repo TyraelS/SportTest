@@ -7,7 +7,7 @@ const getLeagues = state => state.get('leagues', Map());
 const getSportsWithCounters = createSelector(
   [getSports, getLeagues],
   (sports, leagues) => {
-    const sportsWithCounters = sports.map((item, key) => {
+    const sportsWithCounters = sports.map(item => {
       const sportId = item.get('sportId', '');
       const counter = leagues.filter(
         league => league.get('sportId', '') === sportId

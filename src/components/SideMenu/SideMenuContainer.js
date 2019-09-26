@@ -10,14 +10,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import SideMenu from './SideMenu';
-import { fetchSports } from '../../actions/fetchSports';
+import { fetchSports } from '../../reducers/sports';
 import { fetchLeagues } from '../../reducers/leagues';
 import { generateTimestamp } from '../../utils';
 import {
   setSportsTimestamp,
   setLeaguesTimestamp
 } from '../../reducers/responses';
-import getSportsWithCounters from '../../selectors/getSports';
+import getSportsWithCounters from '../../selectors/getSportsWithCounters';
 
 export const mapStateToProps = state => {
   return {
