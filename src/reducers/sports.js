@@ -9,6 +9,10 @@ import {
   checkTimestamp
 } from 'Utils';
 
+export const FETCH_SPORTS_REQUEST = 'FETCH_SPORTS_REQUEST';
+export const FETCH_SPORTS_SUCCESS = 'FETCH_SPORTS_SUCCESS';
+export const FETCH_SPORTS_FAILED = 'FETCH_SPORTS_FAILED';
+
 export const fetchSports = timestamp => {
   return {
     [RSAA]: {
@@ -17,18 +21,18 @@ export const fetchSports = timestamp => {
       method: 'GET',
       headers: getHeaders(),
       types: [
-        'FETCH_SPORTS_REQUEST',
+        FETCH_SPORTS_REQUEST,
         {
-          type: 'FETCH_SPORTS_SUCCESS',
+          type: FETCH_SPORTS_SUCCESS,
           payload: (response, state, res) => {
             const alive = checkTimestamp(
-              state.get('responses').get('sports'),
+              state.get('responses', Map()).get('sports', ''),
               timestamp
             );
             return parseData(res, alive);
           }
         },
-        'FETCH_SPORTS_FAILED'
+        FETCH_SPORTS_FAILED
       ]
     }
   };
@@ -40,8 +44,8 @@ export const sports = (state = initialSportsState, action = {}) => {
   switch (action.type) {
     case 'FETCH_SPORTS_SUCCESS':
       if (!action.payload.alive) return state;
-      const newData = convertNativeToMap(action.payload.tree);
-      return mergeData(state, newData);
+      const sports = convertNativeToMap(action.payload.tree);
+      return mergeData(state, sports);
     default:
       return state;
   }

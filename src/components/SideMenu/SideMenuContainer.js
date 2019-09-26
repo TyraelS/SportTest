@@ -16,16 +16,14 @@ import { setSportsTimestamp, setLeaguesTimestamp } from 'Reducers/responses';
 import { generateTimestamp } from 'Utils';
 import getSportsWithCounters from 'Selectors/getSportsWithCounters';
 
-export const mapStateToProps = state => {
-  return {
-    sports: getSportsWithCounters(state)
-  };
-};
+export const mapStateToProps = state => ({
+  sports: getSportsWithCounters(state)
+});
 
 export const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      dispatchFetchSports: fetchSports,
+      fetchSports: fetchSports,
       fetchLeagues: fetchLeagues,
       setSportsTimestamp: setSportsTimestamp,
       setLeaguesTimestamp: setLeaguesTimestamp
@@ -33,33 +31,32 @@ export const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export const fetchData = function() {
+export const fetchData = props => {
   const {
-    dispatchFetchSports,
+    fetchSports,
     currentSportId,
     fetchLeagues,
     setSportsTimestamp,
     setLeaguesTimestamp
-  } = this.props;
+  } = props;
   const timestamp = generateTimestamp();
   setSportsTimestamp(timestamp);
   setLeaguesTimestamp(timestamp);
-  dispatchFetchSports(timestamp);
+  fetchSports(timestamp);
   currentSportId && fetchLeagues(currentSportId, timestamp);
 };
 
 export const fetchOnMount = {
   componentDidMount() {
-    const fetchDataBind = fetchData.bind(this);
-    fetchDataBind();
+    fetchData(this.props);
     setInterval(() => {
-      fetchDataBind();
-    }, 30000);
+      fetchData(this.props);
+    }, 10000);
   }
 };
 
 export const handleShowEvents = {
-  handleShowEvents: ({
+  sportItemClick: ({
     setCurrentSportId,
     fetchLeagues,
     setLeaguesTimestamp

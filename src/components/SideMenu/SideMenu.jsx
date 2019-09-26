@@ -5,26 +5,21 @@ import SideMenuItem from 'Components/SideMenuItem/';
 
 const displayName = 'SideMenu';
 
-const SideMenu = ({ sports, handleShowEvents, currentSportId }) => {
-  const items = sports.toJS();
+const SideMenu = ({ sports, sportItemClick, currentSportId }) => {
   return (
     <SideMenuStyle>
       render time = {new Date().toLocaleTimeString()}
       {sports
-        ? Object.keys(items).map(key => {
-            let active = false;
-            if (items[key].id === currentSportId) active = true;
-            return (
-              <SideMenuItem
-                key={items[key].id}
-                id={items[key].id}
-                onClick={handleShowEvents}
-                active={active}
-              >
-                {items[key].name} - {items[key].counter}
-              </SideMenuItem>
-            );
-          })
+        ? sports.entrySeq().map(([key, val]) => (
+            <SideMenuItem
+              key={key}
+              id={val.get('id', '')}
+              onClick={sportItemClick}
+              active={val.get('id', '') === currentSportId}
+            >
+              {val.get('name', '')} - {val.get('counter', '')}
+            </SideMenuItem>
+          ))
         : 'Smth went wrong'}
     </SideMenuStyle>
   );

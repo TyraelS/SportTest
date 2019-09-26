@@ -9,6 +9,10 @@ import {
   mergeData
 } from 'Utils';
 
+export const FETCH_LEAGUES_REQUEST = 'FETCH_LEAGUES_REQUEST';
+export const FETCH_LEAGUES_SUCCESS = 'FETCH_LEAGUES_SUCCESS';
+export const FETCH_LEAGUES_FAILED = 'FETCH_LEAGUES_FAILED';
+
 export const fetchLeagues = (currentSportId, timestamp) => {
   return {
     [RSAA]: {
@@ -16,18 +20,18 @@ export const fetchLeagues = (currentSportId, timestamp) => {
       method: 'GET',
       headers: getHeaders(),
       types: [
-        'FETCH_LEAGUES_REQUEST',
+        FETCH_LEAGUES_REQUEST,
         {
-          type: 'FETCH_LEAGUES_SUCCESS',
+          type: FETCH_LEAGUES_SUCCESS,
           payload: (response, state, res) => {
             const alive = checkTimestamp(
-              state.get('responses').get('sports'),
+              state.get('responses', Map()).get('sports', ''),
               timestamp
             );
             return parseData(res, alive);
           }
         },
-        'FETCH_LEAGUES_FAILED'
+        FETCH_LEAGUES_FAILED
       ]
     }
   };
@@ -39,8 +43,8 @@ export const leagues = (state = initialLeaguesState, action = {}) => {
   switch (action.type) {
     case 'FETCH_LEAGUES_SUCCESS':
       if (!action.payload.alive) return state;
-      const newData = convertNativeToMap(action.payload.category);
-      return mergeData(state, newData);
+      const categories = convertNativeToMap(action.payload.category);
+      return mergeData(state, categories);
     default:
       return state;
   }

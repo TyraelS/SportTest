@@ -6,16 +6,15 @@ import LeaguesTabItem from 'Components/LeaguesTabItem';
 const displayName = 'LeaguesTab';
 
 const LeaguesTab = ({ leagues }) => {
-  const items = leagues.toJS();
   return (
     <LeaguesTabStyle>
-      {Object.keys(items).map(key => (
+      {leagues.entrySeq().map(([key, val]) => (
         <LeaguesTabItem
-          key={items[key].id}
-          name={items[key].name}
-          country={items[key].countryCode}
+          key={key}
+          name={val.get('name', '')}
+          country={val.get('countryCode', '')}
         >
-          {items[key].name}
+          {val.get('name', '')}
         </LeaguesTabItem>
       ))}
     </LeaguesTabStyle>
