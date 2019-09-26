@@ -5,7 +5,7 @@ import SideMenuItem from 'Components/SideMenuItem/';
 
 const displayName = 'SideMenu';
 
-export default function SideMenu({ sports, handleShowEvents, currentSportId }) {
+const SideMenu = ({ sports, handleShowEvents, currentSportId }) => {
   const items = sports.toJS();
   return (
     <SideMenuStyle>
@@ -28,6 +28,8 @@ export default function SideMenu({ sports, handleShowEvents, currentSportId }) {
         : 'Smth went wrong'}
     </SideMenuStyle>
   );
-}
+};
 
 SideMenu.displayName = displayName;
+
+export default SideMenu;

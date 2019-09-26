@@ -5,7 +5,7 @@ import LeaguesTabItem from 'Components/LeaguesTabItem';
 
 const displayName = 'LeaguesTab';
 
-export default function LeaguesTab({ leagues }) {
+const LeaguesTab = ({ leagues }) => {
   const items = leagues.toJS();
   return (
     <LeaguesTabStyle>
@@ -20,6 +20,8 @@ export default function LeaguesTab({ leagues }) {
       ))}
     </LeaguesTabStyle>
   );
-}
+};
 
 LeaguesTab.displayName = displayName;
+
+export default LeaguesTab;

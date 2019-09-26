@@ -35,7 +35,7 @@ export const fetchLeagues = (currentSportId, timestamp) => {
 
 export const initialLeaguesState = Map();
 
-export const leagues = (state = initialLeaguesState, action) => {
+export const leagues = (state = initialLeaguesState, action = {}) => {
   switch (action.type) {
     case 'FETCH_LEAGUES_SUCCESS':
       if (!action.payload.alive) return state;

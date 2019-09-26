@@ -19,7 +19,7 @@ export const initialResponsesState = Map({
   leagues: null
 });
 
-export const responses = (state = initialResponsesState, action) => {
+export const responses = (state = initialResponsesState, action = {}) => {
   switch (action.type) {
     case 'SET_SPORTS_TIMESTAMP':
       return set(state, 'sports', action.payload);
