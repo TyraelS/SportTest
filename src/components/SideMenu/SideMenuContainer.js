@@ -12,7 +12,7 @@ import { bindActionCreators } from 'redux';
 import SideMenu from './SideMenu';
 import { fetchSports } from '../../actions/fetchSports';
 import { fetchLeagues } from '../../reducers/leagues';
-import generate from '../../utils/generateTimestamp';
+import { generateTimestamp } from '../../utils';
 import {
   setSportsTimestamp,
   setLeaguesTimestamp
@@ -44,7 +44,7 @@ export const fetchData = function() {
     setSportsTimestamp,
     setLeaguesTimestamp
   } = this.props;
-  const timestamp = generate();
+  const timestamp = generateTimestamp();
   setSportsTimestamp(timestamp);
   setLeaguesTimestamp(timestamp);
   dispatchFetchSports(timestamp);
@@ -68,7 +68,7 @@ export const handleShowEvents = {
     setLeaguesTimestamp
   }) => event => {
     setCurrentSportId(event.target.id);
-    const timestamp = generate();
+    const timestamp = generateTimestamp();
     setLeaguesTimestamp(timestamp);
     fetchLeagues(event.target.id, timestamp);
   }

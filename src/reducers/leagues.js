@@ -1,10 +1,13 @@
 import { RSAA } from 'redux-api-middleware';
 import { Map } from 'immutable';
-import parseData from '../utils/parseData';
-import getHeaders from '../utils/getHeaders';
-import checkTimestamps from '../utils/checkTimestamp';
-import convertNativeToMap from '../utils/convertNativeToMap';
-import mergeData from '../utils/mergeData';
+
+import {
+  parseData,
+  getHeaders,
+  checkTimestamp,
+  convertNativeToMap,
+  mergeData
+} from '../utils';
 
 export const fetchLeagues = (currentSportId, timestamp) => {
   return {
@@ -17,7 +20,7 @@ export const fetchLeagues = (currentSportId, timestamp) => {
         {
           type: 'FETCH_LEAGUES_SUCCESS',
           payload: (response, state, res) => {
-            const alive = checkTimestamps(
+            const alive = checkTimestamp(
               state.get('responses').get('sports'),
               timestamp
             );

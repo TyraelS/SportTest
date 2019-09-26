@@ -1,5 +1,6 @@
 import { compose, setDisplayName, pure } from 'recompose';
 import { connect } from 'react-redux';
+
 import LeaguesTab from './LeaguesTab';
 
 export const mapStateToProps = state => ({
