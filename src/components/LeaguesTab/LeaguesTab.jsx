@@ -1,7 +1,7 @@
 import React from 'react';
 
 import LeaguesTabStyle from './LeaguesTabStyle';
-import LeaguesTabItem from '../LeaguesTabItem';
+import LeaguesTabItem from 'Components/LeaguesTabItem';
 
 const displayName = 'LeaguesTab';
 

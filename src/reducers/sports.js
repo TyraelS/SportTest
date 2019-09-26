@@ -7,7 +7,7 @@ import {
   parseData,
   getHeaders,
   checkTimestamp
-} from '../utils';
+} from 'Utils';
 
 export const fetchSports = timestamp => {
   return {

@@ -7,7 +7,7 @@ import {
   checkTimestamp,
   convertNativeToMap,
   mergeData
-} from '../utils';
+} from 'Utils';
 
 export const fetchLeagues = (currentSportId, timestamp) => {
   return {
