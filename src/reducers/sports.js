@@ -8,6 +8,7 @@ import {
   getHeaders,
   checkTimestamp
 } from 'Utils';
+import { gatewayPath } from 'Config';
 
 export const FETCH_SPORTS_REQUEST = 'FETCH_SPORTS_REQUEST';
 export const FETCH_SPORTS_SUCCESS = 'FETCH_SPORTS_SUCCESS';
@@ -16,8 +17,7 @@ export const FETCH_SPORTS_FAILED = 'FETCH_SPORTS_FAILED';
 export const fetchSports = timestamp => {
   return {
     [RSAA]: {
-      endpoint:
-        'https://gateway.virginbet.com/sportsbook/gateway/v1/web/categories?type=tree&categoryLevel=descendants',
+      endpoint: `${gatewayPath}categories?type=tree&categoryLevel=descendants`,
       method: 'GET',
       headers: getHeaders(),
       types: [

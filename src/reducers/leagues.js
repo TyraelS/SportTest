@@ -8,6 +8,7 @@ import {
   convertNativeToMap,
   mergeData
 } from 'Utils';
+import { gatewayPath } from 'Config';
 
 export const FETCH_LEAGUES_REQUEST = 'FETCH_LEAGUES_REQUEST';
 export const FETCH_LEAGUES_SUCCESS = 'FETCH_LEAGUES_SUCCESS';
@@ -16,7 +17,7 @@ export const FETCH_LEAGUES_FAILED = 'FETCH_LEAGUES_FAILED';
 export const fetchLeagues = (currentSportId, timestamp) => {
   return {
     [RSAA]: {
-      endpoint: `https://gateway.virginbet.com/sportsbook/gateway/v1/web/categories/${currentSportId}?type=tree&categoryLevel=childs&outright=false&specials=false`,
+      endpoint: `${gatewayPath}categories/${currentSportId}?type=tree&categoryLevel=childs&outright=false&specials=false`,
       method: 'GET',
       headers: getHeaders(),
       types: [
