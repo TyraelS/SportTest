@@ -8,7 +8,7 @@
     "@typescript-eslint/eslint-plugin": "1.13.0",
     "@typescript-eslint/parser": "1.13.0",
     "babel-eslint": "10.0.2",
-    "babel-jest": "^24.8.0",
+    "babel-jest": "~21.2.0",
     "babel-loader": "8.0.6",
     "babel-plugin-named-asset-import": "^0.3.3",
     "babel-preset-react-app": "^9.0.1",
@@ -17,6 +17,9 @@
     "css-loader": "2.1.1",
     "dotenv": "6.2.0",
     "dotenv-expand": "4.2.0",
+    "enzyme": "~3.4.0",
+    "enzyme-adapter-react-16": "1.2.0",
+    "enzyme-to-json": "^3.3.4",
     "eslint": "^6.1.0",
     "eslint-config-react-app": "^5.0.1",
     "eslint-loader": "2.2.1",
@@ -33,6 +36,7 @@
     "is-wsl": "^1.1.0",
     "jest": "24.8.0",
     "jest-environment-jsdom-fourteen": "0.1.0",
+    "jest-styled-components": "~5.0.1",
     "jest-resolve": "24.8.0",
     "jest-watch-typeahead": "0.3.1",
     "mini-css-extract-plugin": "0.5.0",
@@ -71,7 +75,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "tests": "jest -c=jest.config.dev.js --colors --no-cache",
+    "test:update-snapshots": "jest --updateSnapshot"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -116,6 +121,12 @@
     ],
     "modulePaths": [],
     "moduleNameMapper": {
+      "Components(.*)$": "<rootDir>/src/components$1",
+      "Config(.*)$": "<rootDir>/src/config$1",
+      "Reducers(.*)$": "<rootDir>/src/reducers$1",
+      "Selectors(.*)$": "<rootDir>/src/selectors$1",
+      "Store(.*)$": "<rootDir>/src/store$1",
+      "Utils(.*)$": "<rootDir>/src/utils$1",
       "^react-native$": "react-native-web",
       "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
     },

@@ -12,6 +12,7 @@ const SideMenuItem = styled.div`
   width: 300px;
   height: 50px;
   line-height: 50px;
+  text-align: center;
   ${getSideMenuStyles}
 `;
 
