@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 
-const getSideMenuStyles = props =>
+export const getSideMenuStyles = props =>
   props.active
-    ? `background-color: #bebebe;
-  color: #fff;`
-    : `background-color: #cecece;
-  color: #fff;`;
+    ? `background-color: #bebebe; color: #fff;`
+    : `background-color: #cecece; color: #fff;`;
 
 const SideMenuItem = styled.div`
   cursor: pointer;

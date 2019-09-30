@@ -8,7 +8,6 @@ const displayName = 'SideMenu';
 const SideMenu = ({ sports, sportItemClick, currentSportId }) => {
   return (
     <SideMenuStyle>
-      render time = {new Date().toLocaleTimeString()}
       {sports
         ? sports.entrySeq().map(([key, val]) => (
             <SideMenuItem
