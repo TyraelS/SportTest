@@ -20,7 +20,7 @@ const SideMenu = ({ sports, sportItemClick, currentSportId }) => {
               {val.get('name', '')} - {val.get('counter', '')}
             </SideMenuItem>
           ))
-        : 'Smth went wrong'}
+        : 'Smth went really wrong'}
     </SideMenuStyle>
   );
 };
