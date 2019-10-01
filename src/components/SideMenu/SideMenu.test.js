@@ -5,16 +5,6 @@ import { fromJS } from 'immutable';
 import SideMenu from './SideMenu';
 
 describe('Given the SideMenu component', () => {
-  beforeEach(() => {
-    component = shallow(
-      <SideMenu
-        sports={sports}
-        sportItemClick={sportItemClick}
-        currentSportId={currentSportId}
-      />
-    );
-  });
-  let component;
   let sports = fromJS({
     SBTC_01: {
       id: 'SBTC_01',
@@ -28,12 +18,26 @@ describe('Given the SideMenu component', () => {
   const sportItemClick = jest.fn();
   const currentSportId = 'SBTC_01';
   describe('when the component is rendered', () => {
+    const component = shallow(
+      <SideMenu
+        sports={sports}
+        sportItemClick={sportItemClick}
+        currentSportId={currentSportId}
+      />
+    );
     it('should match the snapshot 1', () => {
       expect(component).toMatchSnapshot();
-      sports = null;
     });
   });
+  sports = null;
   describe('when sports are not provided', () => {
+    const component = shallow(
+      <SideMenu
+        sports={sports}
+        sportItemClick={sportItemClick}
+        currentSportId={currentSportId}
+      />
+    );
     it('should match the snapshot 2', () => {
       expect(component).toMatchSnapshot();
     });

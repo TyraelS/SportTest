@@ -19,7 +19,6 @@ describe('Given the LeaguesTab component with provided props', () => {
   });
   describe('when the component is rendered', () => {
     const component = shallow(<LeaguesTab leagues={leagues} />);
-
     it('should match the snapshot', () => {
       expect(component).toMatchSnapshot();
     });

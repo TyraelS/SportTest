@@ -1,27 +1,23 @@
 import checkTimestamp from './checkTimestamp';
 
 describe('Given the checkTimestamp function', () => {
-  beforeEach(() => {
-    res = checkTimestamp(oldTimestamp, newTimestamp);
-  });
   let res = null;
-  let oldTimestamp = 0;
-  let newTimestamp = 20;
   describe('and the old timestamp is lesser or equal to the new timestamp', () => {
     it('should return true', () => {
-      expect(res).toBeTruthy();
-      oldTimestamp = 40;
+      res = checkTimestamp(0, 20);
+      expect(res).toBe(true);
     });
   });
   describe('and the old timestamp is bigger than new timestamp', () => {
     it('should return true', () => {
-      expect(res).toBeFalsy();
-      oldTimestamp = null;
+      res = checkTimestamp(40, 20);
+      expect(res).toBe(false);
     });
   });
   describe('and the old timestamp is null', () => {
     it('should return true', () => {
-      expect(res).toBeTruthy();
+      res = checkTimestamp(null, 20);
+      expect(res).toBe(true);
     });
   });
 });
