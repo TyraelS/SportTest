@@ -4,9 +4,8 @@ import { RSAA } from 'redux-api-middleware';
 import {
   convertNativeToMap,
   mergeData,
-  parseData,
   getHeaders,
-  checkTimestamp
+  parseResponseData
 } from 'Utils';
 import { gatewayPath } from 'Config';
 
@@ -24,13 +23,7 @@ export const fetchSports = timestamp => {
         FETCH_SPORTS_REQUEST,
         {
           type: FETCH_SPORTS_SUCCESS,
-          payload: (response, state, res) => {
-            const alive = checkTimestamp(
-              state.get('responses', Map()).get('sports', ''),
-              timestamp
-            );
-            return parseData(res, alive);
-          }
+          payload: parseResponseData('sports', timestamp)
         },
         FETCH_SPORTS_FAILED
       ]

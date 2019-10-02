@@ -2,11 +2,10 @@ import { RSAA } from 'redux-api-middleware';
 import { Map } from 'immutable';
 
 import {
-  parseData,
   getHeaders,
-  checkTimestamp,
   convertNativeToMap,
-  mergeData
+  mergeData,
+  parseResponseData
 } from 'Utils';
 import { gatewayPath } from 'Config';
 
@@ -24,13 +23,7 @@ export const fetchLeagues = (currentSportId, timestamp) => {
         FETCH_LEAGUES_REQUEST,
         {
           type: FETCH_LEAGUES_SUCCESS,
-          payload: (response, state, res) => {
-            const alive = checkTimestamp(
-              state.get('responses', Map()).get('sports', ''),
-              timestamp
-            );
-            return parseData(res, alive);
-          }
+          payload: parseResponseData('leagues', timestamp)
         },
         FETCH_LEAGUES_FAILED
       ]

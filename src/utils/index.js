@@ -4,6 +4,7 @@ import generateTimestamp from './generateTimestamp';
 import getHeaders from './getHeaders';
 import mergeData from './mergeData';
 import parseData from './parseData';
+import parseResponseData from './parseResponseData';
 
 export {
   checkTimestamp,
@@ -11,5 +12,6 @@ export {
   generateTimestamp,
   getHeaders,
   mergeData,
-  parseData
+  parseData,
+  parseResponseData
 };
