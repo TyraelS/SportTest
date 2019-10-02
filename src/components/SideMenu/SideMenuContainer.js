@@ -49,9 +49,7 @@ export const fetchData = props => {
 export const fetchOnMount = {
   componentDidMount() {
     fetchData(this.props);
-    setInterval(() => {
-      fetchData(this.props);
-    }, 10000);
+    setInterval(() => fetchData(this.props), 10000);
   }
 };
 
