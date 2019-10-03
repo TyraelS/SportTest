@@ -2,8 +2,8 @@ import { fetchData, fetchOnMount, handleShowEvents } from './SideMenuContainer';
 
 jest.useFakeTimers();
 
-describe('Given the SideMenuContainer with fetchData, fetchOnMount and handleShowEvents constants', () => {
-  const props = {
+describe('Given the SideMenuContainer', () => {
+  let props = {
     fetchSports: jest.fn(),
     currentSportId: null,
     fetchLeagues: jest.fn(),
@@ -13,22 +13,27 @@ describe('Given the SideMenuContainer with fetchData, fetchOnMount and handleSho
   beforeEach(() => {
     jest.clearAllMocks();
   });
-  describe('and props are provided with currentSportId = falsy to fetchData', () => {
-    it('should not call fetchLeagues', () => {
-      fetchData(props);
-      expect(props.fetchLeagues).not.toHaveBeenCalled();
+  describe('given the fetchData function', () => {
+    describe('and props are provided with currentSportId is falsy to fetchData', () => {
+      it('should not call fetchLeagues', () => {
+        fetchData(props);
+        expect(props.fetchLeagues).not.toHaveBeenCalled();
+      });
+    });
+    describe('and props are provided with currentSportId = truthy to fetchData', () => {
+      it('should call fetchLeagues', () => {
+        props = {
+          ...props,
+          currentSportId: 1
+        };
+        fetchData(props);
+        expect(props.fetchLeagues).toHaveBeenCalled();
+      });
     });
   });
-  describe('and props are provided with currentSportId = truthy to fetchData', () => {
-    it('should call fetchLeagues', () => {
-      props.currentSportId = 1;
-      fetchData(props);
-      expect(props.fetchLeagues).toHaveBeenCalled();
-    });
-  });
-  describe('Given the fetchOnMount constant with ComponentDidMount hook', () => {
+  describe('given the fetchOnMount constant with ComponentDidMount hook', () => {
     const context = {
-      props: props
+      props
     };
     it('calls setInterval', () => {
       fetchOnMount.componentDidMount.call(context);
@@ -36,7 +41,7 @@ describe('Given the SideMenuContainer with fetchData, fetchOnMount and handleSho
       expect(context.props.setSportsTimestamp).toHaveBeenCalledTimes(2);
     });
   });
-  describe('Given a handleShowEvents handler', () => {
+  describe('given a handleShowEvents handler', () => {
     const event = {
       target: {
         id: 1

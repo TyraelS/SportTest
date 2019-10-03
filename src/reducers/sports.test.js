@@ -1,6 +1,16 @@
 import { Map, fromJS } from 'immutable';
+import { RSAA } from 'redux-api-middleware';
 
-import { sports } from './sports';
+import { sports, fetchSports } from './sports';
+
+describe('Given the fetchSports RSAA function', () => {
+  describe('and timestamp is provided', () => {
+    it('should return an [RSAA] object', () => {
+      const res = fetchSports(1);
+      expect(res[RSAA]).toBeTruthy();
+    });
+  });
+});
 
 describe('Given the sports reducer', () => {
   describe('and state with action are not provided', () => {
@@ -9,7 +19,7 @@ describe('Given the sports reducer', () => {
     });
   });
   describe('and action with FETCH_SPORTS_SUCCESS type is provided', () => {
-    const action = {
+    let action = {
       type: 'FETCH_SPORTS_SUCCESS',
       payload: {
         tree: [
@@ -32,7 +42,13 @@ describe('Given the sports reducer', () => {
       });
       describe('and action.payload.alive is false', () => {
         it('should return initial state', () => {
-          action.payload.alive = false;
+          action = {
+            ...action,
+            payload: {
+              ...action.payload,
+              alive: false
+            }
+          };
           expect(sports(Map({ test: 'value' }), action)).toEqual(
             Map({ test: 'value' })
           );

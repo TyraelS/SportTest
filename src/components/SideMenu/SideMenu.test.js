@@ -29,11 +29,10 @@ describe('Given the SideMenu component', () => {
       expect(component).toMatchSnapshot();
     });
   });
-  sports = null;
   describe('when sports are not provided', () => {
     const component = shallow(
       <SideMenu
-        sports={sports}
+        sports={null}
         sportItemClick={sportItemClick}
         currentSportId={currentSportId}
       />

@@ -12,6 +12,7 @@ describe('Given the getSideMenuStyles function', () => {
     it('should match the styles for active item', () => {
       expect(res).toBe(`background-color: #bebebe; color: #fff;`);
       props = {
+        ...props,
         active: false
       };
     });

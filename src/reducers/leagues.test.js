@@ -19,7 +19,7 @@ describe('Given the leagues reducer', () => {
     });
   });
   describe('and action with FETCH_LEAGUES_SUCCESS type is provided', () => {
-    const action = {
+    let action = {
       type: 'FETCH_LEAGUES_SUCCESS',
       payload: {
         category: [
@@ -30,7 +30,7 @@ describe('Given the leagues reducer', () => {
         alive: true
       }
     };
-    describe('and action.payload.alive is true', () => {
+    describe('and payload is still valid', () => {
       it('should return merged state', () => {
         expect(leagues(Map(), action)).toEqual(
           fromJS({
@@ -40,12 +40,17 @@ describe('Given the leagues reducer', () => {
           })
         );
       });
-      describe('and action.payload.alive is false', () => {
+      describe('and payload is no longer valid', () => {
         it('should return initial state', () => {
-          action.payload.alive = false;
-          expect(leagues(Map({ test: 'value' }), action)).toEqual(
-            Map({ test: 'value' })
-          );
+          action = {
+            ...action,
+            payload: {
+              ...action.payload,
+              alive: false
+            }
+          };
+          const mockState = Map({ test: 'value' });
+          expect(leagues(mockState, action)).toEqual(mockState);
         });
       });
     });

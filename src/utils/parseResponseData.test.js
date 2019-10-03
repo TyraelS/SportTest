@@ -19,7 +19,6 @@ describe('Given the parseResponseData function', () => {
   describe('and responseType with timestamp are provided', () => {
     it('should return a function', () => {
       const res = parseResponseData('sports', 1)({}, mockState, mockRes);
-      console.log(res);
       expect(res).toBeInstanceOf(Promise);
     });
   });
