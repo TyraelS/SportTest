@@ -10,7 +10,11 @@ module.exports = {
     '!src/**/*.style.js',
     '!src/**/*.mock.js'
   ],
-  coveragePathIgnorePatterns: ['<rootDir>/src/config', '<rootDir>/src/store'],
+  coveragePathIgnorePatterns: [
+    '<rootDir>/src/config',
+    '<rootDir>/src/store',
+    '<rootDir>/src/themes'
+  ],
   setupFiles: ['./shim.js'],
   setupTestFrameworkScriptFile: './jest.setup.js',
   moduleNameMapper: {

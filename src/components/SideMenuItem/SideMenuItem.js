@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 
 export const getSideMenuStyles = props =>
-  props.active ? `background-color: #bebebe;` : `background-color: #cecece;`;
+  props.active
+    ? `background-color: ${props.theme.sportsItemAccent}`
+    : `background-color: ${props.theme.sportsItemRegular}`;
 
 const SideMenuItem = styled.div`
   cursor: pointer;
-  width: 300px;
+  width: 100%;
   height: 50px;
   line-height: 50px;
   text-align: center;
-  color: #fff;
+  color: ${props => props.theme.textSports};
   ${getSideMenuStyles}
 `;
 
