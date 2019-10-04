@@ -1,5 +1,5 @@
 export default function checkTimestamp(oldStamp, newStamp) {
-  if (oldStamp) {
+  if (oldStamp && newStamp) {
     return oldStamp <= newStamp;
   }
   return true;

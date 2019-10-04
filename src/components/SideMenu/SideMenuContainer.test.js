@@ -14,13 +14,14 @@ describe('Given the SideMenuContainer', () => {
     jest.clearAllMocks();
   });
   describe('given the fetchData function', () => {
-    describe('and props are provided with currentSportId is falsy to fetchData', () => {
+    describe('and props are provided with currentSportId is falsy', () => {
       it('should not call fetchLeagues', () => {
         fetchData(props);
         expect(props.fetchLeagues).not.toHaveBeenCalled();
       });
     });
-    describe('and props are provided with currentSportId = truthy to fetchData', () => {
+
+    describe('and props are provided with currentSportId is truthy', () => {
       it('should call fetchLeagues', () => {
         props = {
           ...props,
@@ -31,16 +32,19 @@ describe('Given the SideMenuContainer', () => {
       });
     });
   });
+
   describe('given the fetchOnMount constant with ComponentDidMount hook', () => {
     const context = {
       props
     };
-    it('calls setInterval', () => {
+
+    it('should call setInterval', () => {
       fetchOnMount.componentDidMount.call(context);
       jest.runOnlyPendingTimers();
       expect(context.props.setSportsTimestamp).toHaveBeenCalledTimes(2);
     });
   });
+
   describe('given a handleShowEvents handler', () => {
     const event = {
       target: {
@@ -52,6 +56,7 @@ describe('Given the SideMenuContainer', () => {
       fetchLeagues: jest.fn(),
       setLeaguesTimestamp: jest.fn()
     };
+
     it('should call fetchLeagues in handleShowEvents', () => {
       handleShowEvents.sportItemClick(handlerContext)(event);
       expect(handlerContext.fetchLeagues).toHaveBeenCalled();

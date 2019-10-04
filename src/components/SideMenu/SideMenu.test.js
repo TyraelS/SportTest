@@ -17,6 +17,7 @@ describe('Given the SideMenu component', () => {
   });
   const sportItemClick = jest.fn();
   const currentSportId = 'SBTC_01';
+
   describe('when the component is rendered', () => {
     const component = shallow(
       <SideMenu
@@ -25,10 +26,12 @@ describe('Given the SideMenu component', () => {
         currentSportId={currentSportId}
       />
     );
+
     it('should match the snapshot 1', () => {
       expect(component).toMatchSnapshot();
     });
   });
+
   describe('when sports are not provided', () => {
     const component = shallow(
       <SideMenu
@@ -37,6 +40,7 @@ describe('Given the SideMenu component', () => {
         currentSportId={currentSportId}
       />
     );
+
     it('should match the snapshot 2', () => {
       expect(component).toMatchSnapshot();
     });

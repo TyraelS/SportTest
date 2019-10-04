@@ -18,6 +18,7 @@ describe('Given the leagues reducer', () => {
       expect(leagues()).toEqual(Map());
     });
   });
+
   describe('and action with FETCH_LEAGUES_SUCCESS type is provided', () => {
     let action = {
       type: 'FETCH_LEAGUES_SUCCESS',
@@ -30,6 +31,7 @@ describe('Given the leagues reducer', () => {
         alive: true
       }
     };
+
     describe('and payload is still valid', () => {
       it('should return merged state', () => {
         expect(leagues(Map(), action)).toEqual(
@@ -40,6 +42,7 @@ describe('Given the leagues reducer', () => {
           })
         );
       });
+
       describe('and payload is no longer valid', () => {
         it('should return initial state', () => {
           action = {

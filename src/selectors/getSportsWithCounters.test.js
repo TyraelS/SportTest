@@ -31,8 +31,10 @@ describe('Given the getSportsWithCounters selector', () => {
       counter: 0
     }
   };
+
   describe('and sports with leagues are provided', () => {
     const res = getSportsWithCounters(mockState);
+
     it('should return sports objects with counters', () => {
       expect(res.toJS()).toEqual(mockResSports);
     });

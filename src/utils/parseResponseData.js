@@ -1,5 +1,12 @@
 import { Map } from 'immutable';
-import { checkTimestamp, parseData } from 'Utils';
+import { checkTimestamp } from 'Utils';
+
+export const parseData = (res, alive) => {
+  return res.text().then(json => ({
+    ...JSON.parse(json),
+    alive: alive
+  }));
+};
 
 const parseResponseData = (responseType, timestamp) => (
   response,

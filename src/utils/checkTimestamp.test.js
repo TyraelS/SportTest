@@ -8,12 +8,14 @@ describe('Given the checkTimestamp function', () => {
       expect(res).toBe(true);
     });
   });
+
   describe('and the old timestamp is bigger than new timestamp', () => {
     it('should return true', () => {
       res = checkTimestamp(40, 20);
       expect(res).toBe(false);
     });
   });
+
   describe('and the old timestamp is null', () => {
     it('should return true', () => {
       res = checkTimestamp(null, 20);

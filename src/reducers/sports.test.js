@@ -18,6 +18,7 @@ describe('Given the sports reducer', () => {
       expect(sports()).toEqual(Map());
     });
   });
+
   describe('and action with FETCH_SPORTS_SUCCESS type is provided', () => {
     let action = {
       type: 'FETCH_SPORTS_SUCCESS',
@@ -30,6 +31,7 @@ describe('Given the sports reducer', () => {
         alive: true
       }
     };
+
     describe('and action.payload.alive is true', () => {
       it('should return merged state', () => {
         expect(sports(Map(), action)).toEqual(
@@ -40,6 +42,7 @@ describe('Given the sports reducer', () => {
           })
         );
       });
+
       describe('and action.payload.alive is false', () => {
         it('should return initial state', () => {
           action = {
@@ -49,6 +52,7 @@ describe('Given the sports reducer', () => {
               alive: false
             }
           };
+
           expect(sports(Map({ test: 'value' }), action)).toEqual(
             Map({ test: 'value' })
           );

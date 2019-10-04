@@ -7,6 +7,7 @@ describe('Given the LeaguesTabItem component with provided props', () => {
     const component = shallow(
       <LeaguesTabItem name='Test name' country='GBR' />
     );
+
     it('should match the snapshot', () => {
       expect(component).toMatchSnapshot();
     });

@@ -3,7 +3,6 @@ import convertNativeToMap from './convertNativeToMap';
 import generateTimestamp from './generateTimestamp';
 import getHeaders from './getHeaders';
 import mergeData from './mergeData';
-import parseData from './parseData';
 import parseResponseData from './parseResponseData';
 
 export {
@@ -12,6 +11,5 @@ export {
   generateTimestamp,
   getHeaders,
   mergeData,
-  parseData,
   parseResponseData
 };

@@ -20,9 +20,11 @@ describe('Given the convertNativeToMap function', () => {
     it('should be the instance of Immutable.Map', () => {
       expect(res).toBeInstanceOf(Map);
     });
+
     it('should have an id as key', () => {
       expect(res.has(data[0].id)).toBeTruthy();
     });
+
     it('should have children as Immutable.Map', () => {
       expect(res.get('SBTC_01', Map())).toBeInstanceOf(Map);
     });
