@@ -7,6 +7,7 @@ import { Map } from 'immutable';
 import { sports, initialSportsState } from 'Reducers/sports';
 import { leagues, initialLeaguesState } from 'Reducers/leagues';
 import { responses, initialResponsesState } from 'Reducers/responses';
+import { themes, initialThemesState } from 'Reducers/themes';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -17,14 +18,16 @@ const enhancer = composeEnhancers(
 const initialStoreState = Map({
   sports: initialSportsState,
   leagues: initialLeaguesState,
-  responses: initialResponsesState
+  responses: initialResponsesState,
+  themes: initialThemesState()
 });
 
 export const store = createStore(
   combineReducers({
     sports,
     leagues,
-    responses
+    responses,
+    themes
   }),
   initialStoreState,
   enhancer

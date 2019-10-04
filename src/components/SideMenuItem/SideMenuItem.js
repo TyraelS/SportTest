@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const getSideMenuStyles = props =>
   props.active
-    ? `background-color: ${props.theme.sportsItemAccent}`
-    : `background-color: ${props.theme.sportsItemRegular}`;
+    ? `background-color: ${props.theme.accent}`
+    : `background-color: ${props.theme.regular}`;
 
 const SideMenuItem = styled.div`
   cursor: pointer;

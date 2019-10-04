@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 const LeaguesTabStyle = styled.div`
-  width: 50%;
+  width: 65%;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow-y: scroll;
   color: ${props => props.theme.textLeagues}
   background-color: ${props => props.theme.leaguesItemEven};
   > div {

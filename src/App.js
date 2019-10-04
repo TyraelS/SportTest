@@ -1,24 +1,22 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import * as themes from 'Themes';
 
-import store from './store';
 import AppStyle from './AppStyle';
-import SideMenu from './components/SideMenu';
-import LeaguesTab from './components/LeaguesTab';
+import SideMenu from 'Components/SideMenu';
+import LeaguesTab from 'Components/LeaguesTab';
+import ThemesTab from 'Components/ThemesTab';
 
-function App() {
-  console.log(themes);
+function App({ theme }) {
+  console.log(theme);
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={themes.light}>
-        <AppStyle>
-          <SideMenu />
-          <LeaguesTab />
-        </AppStyle>
-      </ThemeProvider>
-    </Provider>
+    <ThemeProvider theme={themes[theme]}>
+      <AppStyle>
+        <SideMenu />
+        <LeaguesTab />
+        <ThemesTab />
+      </AppStyle>
+    </ThemeProvider>
   );
 }
 

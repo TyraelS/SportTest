@@ -35,7 +35,7 @@ export const initialSportsState = Map();
 
 export const sports = (state = initialSportsState, action = {}) => {
   switch (action.type) {
-    case 'FETCH_SPORTS_SUCCESS':
+    case FETCH_SPORTS_SUCCESS:
       if (!action.payload.alive) return state;
       const sports = convertNativeToMap(action.payload.tree);
       return mergeData(state, sports);
