@@ -3,8 +3,8 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import AppStyle from './AppStyle';
-import SideMenu from 'Components/SideMenu';
-import LeaguesTab from 'Components/LeaguesTab';
+import SideMenu from './components/SideMenu';
+import LeaguesTab from './components/LeaguesTab';
 
 function App() {
   return (
