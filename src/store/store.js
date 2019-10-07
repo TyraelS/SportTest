@@ -7,19 +7,20 @@ import { Map } from 'immutable';
 import { sports, initialSportsState } from 'Reducers/sports';
 import { leagues, initialLeaguesState } from 'Reducers/leagues';
 import { responses, initialResponsesState } from 'Reducers/responses';
-import { themes, initialThemesState } from 'Reducers/themes';
+import { theme, initialThemeState } from 'Reducers/theme';
+import { localStorageMiddleware } from 'Middleware';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const enhancer = composeEnhancers(
-  applyMiddleware(thunkMiddleware, apiMiddleware)
+  applyMiddleware(thunkMiddleware, apiMiddleware, localStorageMiddleware)
 );
 
 const initialStoreState = Map({
   sports: initialSportsState,
   leagues: initialLeaguesState,
   responses: initialResponsesState,
-  themes: initialThemesState()
+  theme: initialThemeState()
 });
 
 export const store = createStore(
@@ -27,7 +28,7 @@ export const store = createStore(
     sports,
     leagues,
     responses,
-    themes
+    theme
   }),
   initialStoreState,
   enhancer

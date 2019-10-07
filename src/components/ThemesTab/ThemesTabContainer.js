@@ -2,7 +2,7 @@ import { compose, setDisplayName, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { setTheme } from 'Reducers/themes';
+import { setTheme } from 'Reducers/theme';
 import ThemesTab from './ThemesTab';
 
 export const mapDispatchToProps = dispatch =>
@@ -14,11 +14,8 @@ export const mapDispatchToProps = dispatch =>
   );
 
 export const handleSetTheme = {
-  themesTabItemClick: ({ setTheme }) => event => {
-    const theme = event.target.id;
-    console.log(theme);
-    localStorage.setItem('theme', theme);
-    setTheme(theme);
+  themesTabItemClick: ({ setTheme }) => id => {
+    setTheme(id);
   }
 };
 

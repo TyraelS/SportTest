@@ -4,9 +4,13 @@ import ThemesTabItemStyle from './ThemesTabItemStyle';
 
 const displayName = 'ThemesTabItem';
 
+const tabsItemClick = (id, themesTabItemClick) => () => {
+  themesTabItemClick(id);
+};
+
 const ThemesTabItem = ({ id, handler }) => {
   return (
-    <ThemesTabItemStyle id={id} onClick={handler}>
+    <ThemesTabItemStyle id={id} onClick={tabsItemClick(id, handler)}>
       {id.toUpperCase()}
     </ThemesTabItemStyle>
   );

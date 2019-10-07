@@ -293,7 +293,8 @@ module.exports = function(webpackEnv) {
         Selectors: path.resolve(__dirname, '../src/selectors'),
         Utils: path.resolve(__dirname, '../src/utils'),
         Config: path.resolve(__dirname, '../src/config'),
-        Themes: path.resolve(__dirname, '../src/themes')
+        Themes: path.resolve(__dirname, '../src/themes'),
+        Middleware: path.resolve(__dirname, '../src/middleware')
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding

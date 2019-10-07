@@ -3,15 +3,12 @@ import { connect } from 'react-redux';
 import App from './App';
 
 export const mapStateToProps = state => ({
-  theme: state.get('themes', '').toJS().theme
+  theme: state.get('theme', '')
 });
 
 const enhance = compose(
   setDisplayName('AppContainer'),
-  connect(
-    mapStateToProps,
-    null
-  ),
+  connect(mapStateToProps),
   pure
 );
 

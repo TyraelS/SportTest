@@ -10,8 +10,8 @@ const ThemesTab = ({ themesTabItemClick }) => {
   return (
     <ThemesTabStyle>
       <span>Choose a theme</span>
-      {Object.keys(themes).map(item => (
-        <ThemesTabItem key={item} id={item} handler={themesTabItemClick} />
+      {Object.keys(themes).map(id => (
+        <ThemesTabItem key={id} id={id} handler={themesTabItemClick} />
       ))}
     </ThemesTabStyle>
   );

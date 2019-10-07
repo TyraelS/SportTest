@@ -8,7 +8,6 @@ import LeaguesTab from 'Components/LeaguesTab';
 import ThemesTab from 'Components/ThemesTab';
 
 function App({ theme }) {
-  console.log(theme);
   return (
     <ThemeProvider theme={themes[theme]}>
       <AppStyle>
