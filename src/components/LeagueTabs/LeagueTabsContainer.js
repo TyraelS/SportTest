@@ -2,18 +2,13 @@ import { compose, setDisplayName } from 'recompose';
 import { Map } from 'immutable';
 import { connect } from 'react-redux';
 
-import LeaguesTab from './LeaguesTab';
+import LeagueTabs from './LeagueTabs';
 
 export const mapStateToProps = state => ({
   leagues: state.get('leagues', Map())
 });
 
-export const enhance = compose(
-  setDisplayName('LeaguesTabContainer'),
-  connect(
-    mapStateToProps,
-    null
-  )
-);
-
-export default enhance(LeaguesTab);
+export default compose(
+  setDisplayName('LeagueTabsContainer'),
+  connect(mapStateToProps)
+)(LeagueTabs);

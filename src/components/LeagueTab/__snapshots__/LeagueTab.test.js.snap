@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Given the LeaguesTabItem component with provided props when the component is rendered should match the snapshot 1`] = `
+exports[`Given the LeagueTab component with provided props when the component is rendered should match the snapshot 1`] = `
 <ForwardRef(styled.div)>
   <div>
     Test name

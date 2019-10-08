@@ -1,29 +1,35 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
-import SideMenuStyle from './SideMenuStyle';
-import SideMenuItem from 'Components/SideMenuItem/';
+import SideMenuWrapper from './SideMenuWrapper.style';
+import SideMenuItem from 'components/SideMenuItem/';
 
-const displayName = 'SideMenu';
-
-const SideMenu = ({ sports, sportItemClick, currentSportId }) => {
+const SideMenu = ({ sports, sportItemClick, categoryId }) => {
   return (
-    <SideMenuStyle>
-      {sports
-        ? sports.entrySeq().map(([key, val]) => (
-            <SideMenuItem
-              key={key}
-              id={val.get('id', '')}
-              onClick={sportItemClick}
-              active={val.get('id', '') === currentSportId}
-            >
-              {val.get('name', '')} - {val.get('counter', '')}
-            </SideMenuItem>
-          ))
-        : 'Smth went really wrong'}
-    </SideMenuStyle>
+    <SideMenuWrapper>
+      {sports.entrySeq().map(([key, val]) => (
+        <SideMenuItem
+          key={key}
+          id={val.get('id', '')}
+          handler={sportItemClick}
+          active={val.get('id', '') === categoryId}
+        >
+          {`${val.get('name')} - ${val.get('counter')}`}
+        </SideMenuItem>
+      ))}
+    </SideMenuWrapper>
   );
 };
 
-SideMenu.displayName = displayName;
+SideMenu.displayName = 'SideMenu';
+SideMenu.propTypes = {
+  sports: ImmutablePropTypes.map.isRequired,
+  sportItemClick: PropTypes.func.isRequired,
+  categoryId: PropTypes.string
+};
+SideMenu.defaultProps = {
+  categoryId: null
+};
 
 export default SideMenu;

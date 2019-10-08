@@ -10,11 +10,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import SideMenu from './SideMenu';
-import { fetchSports } from 'Reducers/sports';
-import { fetchLeagues } from 'Reducers/leagues';
-import { setSportsTimestamp, setLeaguesTimestamp } from 'Reducers/responses';
-import { generateTimestamp } from 'Utils';
-import getSportsWithCounters from 'Selectors/getSportsWithCounters';
+import { fetchSports } from 'reducers/sports';
+import { fetchLeagues } from 'reducers/leagues';
+import { setSportsTimestamp, setLeaguesTimestamp } from 'reducers/responses';
+import { generateTimestamp } from 'utils';
+import getSportsWithCounters from 'selectors/getSportsWithCounters';
 
 export const mapStateToProps = state => ({
   sports: getSportsWithCounters(state)
@@ -34,7 +34,7 @@ export const mapDispatchToProps = dispatch =>
 export const fetchData = props => {
   const {
     fetchSports,
-    currentSportId,
+    categoryId,
     fetchLeagues,
     setSportsTimestamp,
     setLeaguesTimestamp
@@ -43,39 +43,44 @@ export const fetchData = props => {
   setSportsTimestamp(timestamp);
   setLeaguesTimestamp(timestamp);
   fetchSports(timestamp);
-  currentSportId && fetchLeagues(currentSportId, timestamp);
+  categoryId && fetchLeagues(categoryId, timestamp);
 };
 
-export const fetchOnMount = {
-  componentDidMount() {
-    fetchData(this.props);
-    setInterval(() => fetchData(this.props), 10000);
-  }
+export const lifecycles = () => {
+  let timer = null;
+  return {
+    componentDidMount() {
+      fetchData(this.props);
+      timer = setInterval(() => fetchData(this.props), 10000);
+    },
+    componentWillUnmount() {
+      clearInterval(timer);
+      timer = null;
+    }
+  };
 };
 
-export const handleShowEvents = {
+export const handlers = {
   sportItemClick: ({
-    setCurrentSportId,
+    setCategoryId,
     fetchLeagues,
     setLeaguesTimestamp
-  }) => event => {
-    setCurrentSportId(event.target.id);
+  }) => id => {
     const timestamp = generateTimestamp();
+    setCategoryId(id);
     setLeaguesTimestamp(timestamp);
-    fetchLeagues(event.target.id, timestamp);
+    fetchLeagues(id, timestamp);
   }
 };
 
-export const enhance = compose(
+export default compose(
   setDisplayName('SideMenuContainer'),
   connect(
     mapStateToProps,
     mapDispatchToProps
   ),
-  withState('currentSportId', 'setCurrentSportId', null),
-  lifecycle(fetchOnMount),
-  withHandlers(handleShowEvents),
+  withState('categoryId', 'setCategoryId', null),
+  lifecycle(lifecycles()),
+  withHandlers(handlers),
   pure
-);
-
-export default enhance(SideMenu);
+)(SideMenu);

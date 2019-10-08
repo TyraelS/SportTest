@@ -2,7 +2,7 @@ import { compose, setDisplayName, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { setTheme } from 'Reducers/theme';
+import { setTheme } from 'reducers/theme';
 import ThemesTab from './ThemesTab';
 
 export const mapDispatchToProps = dispatch =>

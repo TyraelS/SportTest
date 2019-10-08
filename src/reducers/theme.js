@@ -14,11 +14,11 @@ export const initialThemeState = () => {
   return localStorage.getItem('theme');
 };
 
-export const theme = (state = initialThemeState(), action = {}) => {
+export default function theme(state = initialThemeState(), action = {}) {
   switch (action.type) {
     case SET_THEME:
       return action.payload;
     default:
       return state;
   }
-};
+}

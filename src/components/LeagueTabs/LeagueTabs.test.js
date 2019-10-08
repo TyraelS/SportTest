@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { fromJS } from 'immutable';
 
-import LeaguesTab from './LeaguesTab';
+import LeagueTabs from './LeagueTabs';
 
-describe('Given the LeaguesTab component with provided props', () => {
+describe('Given the LeagueTabs component with provided props', () => {
   const leagues = fromJS({
     SBTC_01: {
       key: 'SBTC_01',
@@ -19,7 +19,7 @@ describe('Given the LeaguesTab component with provided props', () => {
   });
 
   describe('when the component is rendered', () => {
-    const component = shallow(<LeaguesTab leagues={leagues} />);
+    const component = shallow(<LeagueTabs leagues={leagues} />);
 
     it('should match the snapshot', () => {
       expect(component).toMatchSnapshot();

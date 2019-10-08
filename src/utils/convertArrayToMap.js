@@ -1,5 +1,5 @@
 import { Map } from 'immutable';
 
-export default function convertNativeToMap(data) {
+export default function convertArrayToMap(data) {
   return Map(data.map(item => [item.id, Map(item)]));
 }

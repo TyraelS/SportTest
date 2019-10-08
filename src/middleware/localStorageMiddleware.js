@@ -1,4 +1,4 @@
-import { SET_THEME } from 'Reducers/theme';
+import { SET_THEME } from 'reducers/theme';
 
 const localStorageMiddleware = () => next => action => {
   if (action.type === SET_THEME) {

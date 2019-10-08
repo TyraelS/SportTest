@@ -1,8 +1,8 @@
 import React from 'react';
 
 import ThemesTabStyle from './ThemesTabStyle';
-import ThemesTabItem from 'Components/ThemesTabItem';
-import * as themes from 'Themes';
+import ThemesTabItem from 'components/ThemesTabItem';
+import * as themes from 'themes';
 
 const displayName = 'ThemesTab';
 

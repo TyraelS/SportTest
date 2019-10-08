@@ -4,11 +4,11 @@ import thunkMiddleware from 'redux-thunk';
 import { apiMiddleware } from 'redux-api-middleware';
 import { Map } from 'immutable';
 
-import { sports, initialSportsState } from 'Reducers/sports';
-import { leagues, initialLeaguesState } from 'Reducers/leagues';
-import { responses, initialResponsesState } from 'Reducers/responses';
-import { theme, initialThemeState } from 'Reducers/theme';
-import { localStorageMiddleware } from 'Middleware';
+import sports, { initialSportsState } from 'reducers/sports';
+import leagues, { initialLeaguesState } from 'reducers/leagues';
+import responses, { initialResponsesState } from 'reducers/responses';
+import theme, { initialThemeState } from 'reducers/theme';
+import { localStorageMiddleware } from 'middleware';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

@@ -1,12 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import LeaguesTabItem from './LeaguesTabItem';
+import LeagueTab from './LeagueTab';
 
-describe('Given the LeaguesTabItem component with provided props', () => {
+describe('Given the LeagueTab component with provided props', () => {
   describe('when the component is rendered', () => {
-    const component = shallow(
-      <LeaguesTabItem name='Test name' country='GBR' />
-    );
+    const component = shallow(<LeagueTab name='Test name' country='GBR' />);
 
     it('should match the snapshot', () => {
       expect(component).toMatchSnapshot();

@@ -1,7 +1,7 @@
 import { Map, fromJS } from 'immutable';
 import { RSAA } from 'redux-api-middleware';
 
-import { sports, fetchSports } from './sports';
+import sportsReducer, { fetchSports } from './sports';
 
 describe('Given the fetchSports RSAA function', () => {
   describe('and timestamp is provided', () => {
@@ -12,16 +12,16 @@ describe('Given the fetchSports RSAA function', () => {
   });
 });
 
-describe('Given the sports reducer', () => {
+describe('Given the sportsReducer', () => {
   describe('and state with action are not provided', () => {
     it('should call reducer with initial values for state and action and return initial state', () => {
-      expect(sports()).toEqual(Map());
+      expect(sportsReducer()).toEqual(Map());
     });
   });
 
-  describe('and action with FETCH_SPORTS_SUCCESS type is provided', () => {
+  describe('and action with SPORTS_SUCCESS type is provided', () => {
     let action = {
-      type: 'FETCH_SPORTS_SUCCESS',
+      type: 'SPORTS_SUCCESS',
       payload: {
         tree: [
           {
@@ -34,7 +34,7 @@ describe('Given the sports reducer', () => {
 
     describe('and action.payload.alive is true', () => {
       it('should return merged state', () => {
-        expect(sports(Map(), action)).toEqual(
+        expect(sportsReducer(Map(), action)).toEqual(
           fromJS({
             SBTC_01: {
               id: 'SBTC_01'
@@ -53,7 +53,7 @@ describe('Given the sports reducer', () => {
             }
           };
 
-          expect(sports(Map({ test: 'value' }), action)).toEqual(
+          expect(sportsReducer(Map({ test: 'value' }), action)).toEqual(
             Map({ test: 'value' })
           );
         });

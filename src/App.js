@@ -1,18 +1,18 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import * as themes from 'Themes';
+import * as themes from 'themes';
 
 import AppStyle from './AppStyle';
-import SideMenu from 'Components/SideMenu';
-import LeaguesTab from 'Components/LeaguesTab';
-import ThemesTab from 'Components/ThemesTab';
+import SideMenu from 'components/SideMenu';
+import LeagueTabs from 'components/LeagueTabs';
+import ThemesTab from 'components/ThemesTab';
 
 function App({ theme }) {
   return (
     <ThemeProvider theme={themes[theme]}>
       <AppStyle>
         <SideMenu />
-        <LeaguesTab />
+        <LeagueTabs />
         <ThemesTab />
       </AppStyle>
     </ThemeProvider>

@@ -1,10 +1,9 @@
 import { RSAA } from 'redux-api-middleware';
 import { Map, fromJS } from 'immutable';
-
-import { leagues, fetchLeagues } from './leagues';
+import leaguesReducer, { LEAGUES_SUCCESS, fetchLeagues } from './leagues';
 
 describe('Given the fetchLeagues RSAA function', () => {
-  describe('and currentSportId with timestamp are provided', () => {
+  describe('and categoryId with timestamp are provided', () => {
     it('should return an [RSAA] object', () => {
       const res = fetchLeagues('1', 1);
       expect(res[RSAA]).toBeTruthy();
@@ -12,16 +11,16 @@ describe('Given the fetchLeagues RSAA function', () => {
   });
 });
 
-describe('Given the leagues reducer', () => {
+describe('Given the leaguesReducer', () => {
   describe('and state with action are not provided', () => {
     it('should call reducer with initial values for state and action and return initial state', () => {
-      expect(leagues()).toEqual(Map());
+      expect(leaguesReducer()).toEqual(Map());
     });
   });
 
-  describe('and action with FETCH_LEAGUES_SUCCESS type is provided', () => {
+  describe('and action with LEAGUES_SUCCESS type is provided', () => {
     let action = {
-      type: 'FETCH_LEAGUES_SUCCESS',
+      type: LEAGUES_SUCCESS,
       payload: {
         category: [
           {
@@ -34,7 +33,7 @@ describe('Given the leagues reducer', () => {
 
     describe('and payload is still valid', () => {
       it('should return merged state', () => {
-        expect(leagues(Map(), action)).toEqual(
+        expect(leaguesReducer(Map(), action)).toEqual(
           fromJS({
             SBTC_01: {
               id: 'SBTC_01'
@@ -53,7 +52,7 @@ describe('Given the leagues reducer', () => {
             }
           };
           const mockState = Map({ test: 'value' });
-          expect(leagues(mockState, action)).toEqual(mockState);
+          expect(leaguesReducer(mockState, action)).toEqual(mockState);
         });
       });
     });

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const SideMenuStyle = styled.div`
+const SideMenuWrapper = styled.div`
   width: 25%;
   height: 100vh;
   display: flex;
@@ -8,4 +8,4 @@ const SideMenuStyle = styled.div`
   overflow-y: scroll;
 `;
 
-export default SideMenuStyle;
+export default SideMenuWrapper;

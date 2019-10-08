@@ -1,8 +1,8 @@
 import { Map } from 'immutable';
 
-import convertNativeToMap from './convertNativeToMap';
+import convertArrayToMap from './convertArrayToMap';
 
-describe('Given the convertNativeToMap function', () => {
+describe('Given the convertArrayToMap function', () => {
   const data = [
     {
       id: 'SBTC_01',
@@ -16,7 +16,7 @@ describe('Given the convertNativeToMap function', () => {
     }
   ];
   describe('and the data array is provided', () => {
-    const res = convertNativeToMap(data);
+    const res = convertArrayToMap(data);
     it('should be the instance of Immutable.Map', () => {
       expect(res).toBeInstanceOf(Map);
     });
