@@ -22,7 +22,7 @@ export const initialResponsesState = Map({
   leagues: null
 });
 
-export const responses = (state = initialResponsesState, action = {}) => {
+export default function responses(state = initialResponsesState, action = {}) {
   switch (action.type) {
     case SET_SPORTS_TIMESTAMP:
       return set(state, 'sports', action.payload);
@@ -31,4 +31,4 @@ export const responses = (state = initialResponsesState, action = {}) => {
     default:
       return state;
   }
-};
+}

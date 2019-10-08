@@ -1,7 +1,7 @@
 import { Map, fromJS } from 'immutable';
 import { RSAA } from 'redux-api-middleware';
 
-import { sports as sportsReducer, fetchSports } from './sports';
+import sportsReducer, { fetchSports } from './sports';
 
 describe('Given the fetchSports RSAA function', () => {
   describe('and timestamp is provided', () => {

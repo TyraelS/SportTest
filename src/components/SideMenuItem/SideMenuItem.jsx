@@ -8,10 +8,9 @@ const sideMenuItemClick = (id, sportItemClick) => () => {
 
 export default class SideMenuItem extends PureComponent {
   render() {
-    const { key, id, handler, active, children } = this.props;
+    const { id, handler, active, children } = this.props;
     return (
       <SideMenuItemWrapper
-        key={key}
         onClick={sideMenuItemClick(id, handler)}
         active={active}
       >

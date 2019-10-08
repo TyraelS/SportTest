@@ -1,7 +1,6 @@
 import { fromJS } from 'immutable';
 
-import {
-  responses as responsesReducer,
+import responsesReducer, {
   setSportsTimestamp,
   SET_SPORTS_TIMESTAMP,
   setLeaguesTimestamp,

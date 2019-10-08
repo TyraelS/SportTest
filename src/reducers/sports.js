@@ -31,7 +31,7 @@ export const fetchSports = timestamp => ({
 
 export const initialSportsState = Map();
 
-export const sports = (state = initialSportsState, action = {}) => {
+export default function sports(state = initialSportsState, action = {}) {
   switch (action.type) {
     case 'SPORTS_SUCCESS':
       if (!action.payload.alive) return state;
@@ -40,4 +40,4 @@ export const sports = (state = initialSportsState, action = {}) => {
     default:
       return state;
   }
-};
+}
