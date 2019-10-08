@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given the SideMenu component when the component is rendered should match the snapshot 1 1`] = `
+<ForwardRef(styled.div)>
+  <SideMenuItem
+    active={true}
+    handler={[MockFunction]}
+    id="SBTC_01"
+    key="SBTC_01"
+  >
+    SortofLeague - undefined
+  </SideMenuItem>
+  <SideMenuItem
+    active={false}
+    handler={[MockFunction]}
+    id="SBTC_02"
+    key="SBTC_02"
+  >
+    AnotherLeague - undefined
+  </SideMenuItem>
+</ForwardRef(styled.div)>
+`;
