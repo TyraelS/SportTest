@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 
-export const getSideMenuStyles = props =>
-  props.active ? `background-color: #bebebe;` : `background-color: #cecece;`;
-
 const SideMenuItem = styled.div`
   cursor: pointer;
   width: 300px;
@@ -10,7 +7,8 @@ const SideMenuItem = styled.div`
   line-height: 50px;
   text-align: center;
   color: #fff;
-  ${getSideMenuStyles}
+  ${props =>
+    props.active ? `background-color: #bebebe;` : `background-color: #cecece;`}
 `;
 
 export default SideMenuItem;

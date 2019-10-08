@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import SideMenuWrapper from './SideMenuWrapper.style';
 import SideMenuItem from 'components/SideMenuItem/';
@@ -21,5 +23,13 @@ const SideMenu = ({ sports, sportItemClick, categoryId }) => {
 };
 
 SideMenu.displayName = 'SideMenu';
+SideMenu.propTypes = {
+  sports: ImmutablePropTypes.map.isRequired,
+  sportItemClick: PropTypes.func.isRequired,
+  categoryId: PropTypes.string
+};
+SideMenu.defaultProps = {
+  categoryId: null
+};
 
 export default SideMenu;

@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
-import SideMenuItemWrapper from './SideMenuItemWrapper';
+import SideMenuItemWrapper from './SideMenuItemWrapper.style';
 
-const sideMenuItemClick = (id, sportItemClick) => () => {
+export const sideMenuItemClick = (id, sportItemClick) => () => {
   sportItemClick(id);
 };
 
@@ -21,3 +22,8 @@ export default class SideMenuItem extends PureComponent {
 }
 
 SideMenuItem.displayName = 'SideMenuItem';
+SideMenuItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  handler: PropTypes.func.isRequired,
+  active: PropTypes.bool.isRequired
+};

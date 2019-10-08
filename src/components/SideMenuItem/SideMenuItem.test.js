@@ -1,26 +1,23 @@
-import { getSideMenuStyles } from './SideMenuItemWrapper';
+import React from 'react';
+import { shallow } from 'enzyme';
 
-describe('Given the getSideMenuStyles function', () => {
-  let props = {
-    active: true
-  };
+import SideMenuItem, { sideMenuItemClick } from './SideMenuItem';
 
-  let res;
-
-  describe('and element is active', () => {
-    it('should match the background-color style', () => {
-      res = getSideMenuStyles(props);
-      expect(res).toBe(`background-color: #bebebe;`);
-    });
+describe('Given the sideMenuItemClick function', () => {
+  const mockFunction = jest.fn();
+  it('should call passed function with provided id', () => {
+    sideMenuItemClick('1', mockFunction)();
+    expect(mockFunction).toHaveBeenCalledWith('1');
   });
+});
 
-  describe('and element is not active', () => {
-    it('should match the background-color style', () => {
-      props = {
-        active: false
-      };
-      res = getSideMenuStyles(props);
-      expect(res).toBe(`background-color: #cecece;`);
+describe('Given the SideMenuItem component', () => {
+  describe('when the component is rendered', () => {
+    const component = shallow(
+      <SideMenuItem id='1' handler={jest.fn()} active={true} children='text' />
+    );
+    it('should match the snapshot', () => {
+      expect(component).toMatchSnapshot();
     });
   });
 });
