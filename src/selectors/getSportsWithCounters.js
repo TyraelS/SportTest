@@ -9,9 +9,9 @@ const getSportsWithCounters = createSelector(
   (sports, leagues) => {
     const sportsWithCounters = sports.map(item => {
       const sportId = item.get('sportId', '');
-      const counter = leagues.filter(
+      const counter = leagues.count(
         league => league.get('sportId', '') === sportId
-      ).size;
+      );
       return item.set('counter', counter);
     });
     return sportsWithCounters;

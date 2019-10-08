@@ -1,5 +1,5 @@
 import checkTimestamp from './checkTimestamp';
-import convertNativeToMap from './convertNativeToMap';
+import convertArrayToMap from './convertArrayToMap';
 import generateTimestamp from './generateTimestamp';
 import getHeaders from './getHeaders';
 import mergeData from './mergeData';
@@ -7,7 +7,7 @@ import parseResponseData from './parseResponseData';
 
 export {
   checkTimestamp,
-  convertNativeToMap,
+  convertArrayToMap,
   generateTimestamp,
   getHeaders,
   mergeData,

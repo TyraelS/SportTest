@@ -1,4 +1,4 @@
-import { getSideMenuStyles } from './SideMenuItem';
+import { getSideMenuStyles } from './SideMenuItemWrapper';
 
 describe('Given the getSideMenuStyles function', () => {
   let props = {

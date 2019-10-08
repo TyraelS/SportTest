@@ -1,11 +1,11 @@
-import { fetchData, fetchOnMount, handleShowEvents } from './SideMenuContainer';
+import { fetchData, lifecycles, handlers } from './SideMenuContainer';
 
 jest.useFakeTimers();
 
 describe('Given the SideMenuContainer', () => {
   let props = {
     fetchSports: jest.fn(),
-    currentSportId: null,
+    categoryId: null,
     fetchLeagues: jest.fn(),
     setSportsTimestamp: jest.fn(),
     setLeaguesTimestamp: jest.fn()
@@ -14,18 +14,18 @@ describe('Given the SideMenuContainer', () => {
     jest.clearAllMocks();
   });
   describe('given the fetchData function', () => {
-    describe('and props are provided with currentSportId is falsy', () => {
+    describe('and props are provided with categoryId is falsy', () => {
       it('should not call fetchLeagues', () => {
         fetchData(props);
         expect(props.fetchLeagues).not.toHaveBeenCalled();
       });
     });
 
-    describe('and props are provided with currentSportId is truthy', () => {
+    describe('and props are provided with categoryId is truthy', () => {
       it('should call fetchLeagues', () => {
         props = {
           ...props,
-          currentSportId: 1
+          categoryId: 1
         };
         fetchData(props);
         expect(props.fetchLeagues).toHaveBeenCalled();
@@ -33,32 +33,28 @@ describe('Given the SideMenuContainer', () => {
     });
   });
 
-  describe('given the fetchOnMount constant with ComponentDidMount hook', () => {
-    const context = {
-      props
-    };
-
+  describe('given the lifecycles constant with ComponentDidMount hook', () => {
     it('should call setInterval', () => {
-      fetchOnMount.componentDidMount.call(context);
+      lifecycles().componentDidMount.call({ props });
       jest.runOnlyPendingTimers();
-      expect(context.props.setSportsTimestamp).toHaveBeenCalledTimes(2);
+      expect(props.setSportsTimestamp).toHaveBeenCalledTimes(2);
     });
   });
 
-  describe('given a handleShowEvents handler', () => {
+  describe('given a handlers const', () => {
     const event = {
       target: {
         id: 1
       }
     };
     const handlerContext = {
-      setCurrentSportId: jest.fn(),
+      setCategoryId: jest.fn(),
       fetchLeagues: jest.fn(),
       setLeaguesTimestamp: jest.fn()
     };
 
-    it('should call fetchLeagues in handleShowEvents', () => {
-      handleShowEvents.sportItemClick(handlerContext)(event);
+    it('should call fetchLeagues in handlers', () => {
+      handlers.sportItemClick(handlerContext)(event);
       expect(handlerContext.fetchLeagues).toHaveBeenCalled();
     });
   });

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-const LeaguesTabStyle = styled.div`
+const SideMenuWrapper = styled.div`
   width: 300px;
-  height: auto;
+  min-height: 400px;
   display: flex;
   flex-direction: column;
 `;
 
-export default LeaguesTabStyle;
+export default SideMenuWrapper;

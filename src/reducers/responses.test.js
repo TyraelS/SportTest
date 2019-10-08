@@ -1,33 +1,29 @@
 import { fromJS } from 'immutable';
 
 import {
-  responses,
+  responses as responsesReducer,
   setSportsTimestamp,
   SET_SPORTS_TIMESTAMP,
   setLeaguesTimestamp,
   SET_LEAGUES_TIMESTAMP
 } from './responses';
 
-describe('Given the responses reducer', () => {
+describe('Given the responsesReducer', () => {
   describe('given setSportsTimestamp action', () => {
-    const res = setSportsTimestamp(1);
-    it('should return an object with type SET_SPORTS_TIMESTAMP', () => {
-      expect(res.type).toBe(SET_SPORTS_TIMESTAMP);
-    });
-
-    it('and should return an object with timestamp payload', () => {
-      expect(res.payload).toBe(1);
+    it('should return an action with SET_SPORTS_TIMESTAMP and payload with provided time', () => {
+      expect(setSportsTimestamp(1)).toEqual({
+        type: SET_SPORTS_TIMESTAMP,
+        payload: 1
+      });
     });
   });
 
   describe('given setLeaguesTimestamp action', () => {
-    const res = setLeaguesTimestamp(1);
-    it('should return an object with type SET_LEAGUES_TIMESTAMP', () => {
-      expect(res.type).toBe(SET_LEAGUES_TIMESTAMP);
-    });
-
-    it('and should return an object with timestamp payload', () => {
-      expect(res.payload).toBe(1);
+    it('should return an action with SET_LEAGUES_TIMESTAMP and payload with provided time', () => {
+      expect(setLeaguesTimestamp(1)).toEqual({
+        type: SET_LEAGUES_TIMESTAMP,
+        payload: 1
+      });
     });
   });
 
@@ -38,7 +34,7 @@ describe('Given the responses reducer', () => {
 
   describe('when state with action are not provided', () => {
     it('should call reducer with initial values for state and action and return initial state', () => {
-      expect(responses()).toEqual(initialState);
+      expect(responsesReducer()).toEqual(initialState);
     });
   });
 
@@ -49,7 +45,7 @@ describe('Given the responses reducer', () => {
     };
 
     it('should return state with new sports timestamp', () => {
-      expect(responses(initialState, action)).toEqual(
+      expect(responsesReducer(initialState, action)).toEqual(
         fromJS({ sports: 1, leagues: null })
       );
     });
@@ -62,7 +58,7 @@ describe('Given the responses reducer', () => {
     };
 
     it('should return state with new sports timestamp', () => {
-      expect(responses(initialState, action)).toEqual(
+      expect(responsesReducer(initialState, action)).toEqual(
         fromJS({ sports: null, leagues: 1 })
       );
     });

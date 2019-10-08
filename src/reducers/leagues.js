@@ -3,43 +3,41 @@ import { Map } from 'immutable';
 
 import {
   getHeaders,
-  convertNativeToMap,
+  convertArrayToMap,
   mergeData,
   parseResponseData
-} from 'Utils';
-import { gatewayPath } from 'Config';
+} from 'utils';
+import { gatewayPath } from 'config';
 
-export const FETCH_LEAGUES_REQUEST = 'FETCH_LEAGUES_REQUEST';
-export const FETCH_LEAGUES_SUCCESS = 'FETCH_LEAGUES_SUCCESS';
-export const FETCH_LEAGUES_FAILED = 'FETCH_LEAGUES_FAILED';
+export const LEAGUES_REQUEST = 'LEAGUES_REQUEST';
+export const LEAGUES_SUCCESS = 'LEAGUES_SUCCESS';
+export const LEAGUES_FAILED = 'LEAGUES_FAILED';
 
-export const fetchLeagues = (currentSportId, timestamp) => {
-  return {
-    [RSAA]: {
-      endpoint: `${gatewayPath}categories/${currentSportId}?type=tree&categoryLevel=childs&outright=false&specials=false`,
-      method: 'GET',
-      headers: getHeaders(),
-      types: [
-        FETCH_LEAGUES_REQUEST,
-        {
-          type: FETCH_LEAGUES_SUCCESS,
-          payload: parseResponseData('leagues', timestamp)
-        },
-        FETCH_LEAGUES_FAILED
-      ]
-    }
-  };
-};
+export const fetchLeagues = (categoryId, timestamp) => ({
+  [RSAA]: {
+    endpoint: `${gatewayPath}categories/${categoryId}?type=tree&categoryLevel=childs&outright=false&specials=false`,
+    method: 'GET',
+    headers: getHeaders(),
+    types: [
+      LEAGUES_REQUEST,
+      {
+        type: LEAGUES_SUCCESS,
+        payload: parseResponseData('leagues', timestamp)
+      },
+      LEAGUES_FAILED
+    ]
+  }
+});
 
 export const initialLeaguesState = Map();
 
-export const leagues = (state = initialLeaguesState, action = {}) => {
+export default function leagues(state = initialLeaguesState, action = {}) {
   switch (action.type) {
-    case 'FETCH_LEAGUES_SUCCESS':
+    case LEAGUES_SUCCESS:
       if (!action.payload.alive) return state;
-      const categories = convertNativeToMap(action.payload.category);
+      const categories = convertArrayToMap(action.payload.category);
       return mergeData(state, categories);
     default:
       return state;
   }
-};
+}

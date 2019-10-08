@@ -1,5 +1,5 @@
 import { Map } from 'immutable';
-import { checkTimestamp } from 'Utils';
+import { checkTimestamp } from 'utils';
 
 export const parseData = (res, alive) => {
   return res.text().then(json => ({
