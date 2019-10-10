@@ -22,5 +22,6 @@ module.exports = {
     '\\.(eot|otf|webp|svg|ttf|woff|woff2|jpg|jpeg|png)$':
       '<rootDir>/fileMock.js'
   },
-  transformIgnorePatterns: ['node_modules/(?!(redux-api-middleware)/)']
+  transformIgnorePatterns: ['node_modules/(?!(redux-api-middleware)/)'],
+  roots: ['<rootDir>/src/']
 };
