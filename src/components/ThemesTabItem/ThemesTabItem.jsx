@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ThemesTabItemWrapper from './ThemesTabItemWrapper.style';
 
-const tabsItemClick = (id, themesTabItemClick) => () => {
+export const tabsItemClick = (id, themesTabItemClick) => () => {
   themesTabItemClick(id);
 };
 
@@ -12,5 +13,9 @@ const ThemesTabItem = ({ id, handler }) => (
   </ThemesTabItemWrapper>
 );
 ThemesTabItem.displayName = 'ThemesTabItem';
+ThemesTabItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  handler: PropTypes.func.isRequired
+};
 
 export default ThemesTabItem;

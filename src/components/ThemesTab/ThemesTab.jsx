@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ThemesTabWrapper from './ThemesTabWrapper.style';
 import ThemesTabItem from 'components/ThemesTabItem';
@@ -14,5 +15,8 @@ const ThemesTab = ({ themesTabItemClick }) => (
 );
 
 ThemesTab.displayName = 'ThemesTab';
+ThemesTab.propTypes = {
+  themesTabItemClick: PropTypes.func.isRequired
+};
 
 export default ThemesTab;

@@ -47,15 +47,15 @@ export const fetchData = props => {
 };
 
 export const lifecycles = () => {
-  let timer = null;
   return {
+    timer: null,
     componentDidMount() {
       fetchData(this.props);
-      timer = setInterval(() => fetchData(this.props), 10000);
+      this.timer = setInterval(() => fetchData(this.props), 10000);
     },
     componentWillUnmount() {
-      clearInterval(timer);
-      timer = null;
+      clearInterval(this.timer);
+      this.timer = null;
     }
   };
 };

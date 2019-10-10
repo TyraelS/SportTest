@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import ThemesTabItem from './ThemesTabItem';
+import ThemesTabItem, { tabsItemClick } from './ThemesTabItem';
 
 describe('Given the ThemesTabItem component', () => {
   describe('when the component is rendered', () => {
@@ -9,5 +9,13 @@ describe('Given the ThemesTabItem component', () => {
     it('should match the snapshot', () => {
       expect(component).toMatchSnapshot();
     });
+  });
+});
+
+describe('Given the tabsItemClick function', () => {
+  it('should call provided function with id', () => {
+    const mock = jest.fn();
+    tabsItemClick(1, mock)();
+    expect(mock).toHaveBeenCalledWith(1);
   });
 });

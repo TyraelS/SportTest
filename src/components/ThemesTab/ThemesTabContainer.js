@@ -13,7 +13,7 @@ export const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export const handleSetTheme = {
+export const handlers = {
   themesTabItemClick: ({ setTheme }) => id => {
     setTheme(id);
   }
@@ -25,5 +25,5 @@ export default compose(
     null,
     mapDispatchToProps
   ),
-  withHandlers(handleSetTheme)
+  withHandlers(handlers)
 )(ThemesTab);
