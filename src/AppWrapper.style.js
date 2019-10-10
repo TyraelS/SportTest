@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const AppStyle = styled.div`
+const AppWrapper = styled.div`
   user-select: none;
   max-width: 2200px;
   display: flex;
@@ -9,4 +9,4 @@ const AppStyle = styled.div`
   }
 `;
 
-export default AppStyle;
+export default AppWrapper;

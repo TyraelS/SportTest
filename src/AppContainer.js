@@ -6,10 +6,8 @@ export const mapStateToProps = state => ({
   theme: state.get('theme', '')
 });
 
-const enhance = compose(
+export default compose(
   setDisplayName('AppContainer'),
   connect(mapStateToProps),
   pure
-);
-
-export default enhance(App);
+)(App);

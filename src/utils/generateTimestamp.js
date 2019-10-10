@@ -1,3 +1,4 @@
 export default function generateTimestamp() {
-  return Date.now();
+  const timestamp = new Date();
+  return timestamp.getTime();
 }

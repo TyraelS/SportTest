@@ -1,21 +1,16 @@
 import React from 'react';
 
-import ThemesTabItemStyle from './ThemesTabItemStyle';
-
-const displayName = 'ThemesTabItem';
+import ThemesTabItemWrapper from './ThemesTabItemWrapper.style';
 
 const tabsItemClick = (id, themesTabItemClick) => () => {
   themesTabItemClick(id);
 };
 
-const ThemesTabItem = ({ id, handler }) => {
-  return (
-    <ThemesTabItemStyle id={id} onClick={tabsItemClick(id, handler)}>
-      {id.toUpperCase()}
-    </ThemesTabItemStyle>
-  );
-};
-
-ThemesTabItem.displayName = displayName;
+const ThemesTabItem = ({ id, handler }) => (
+  <ThemesTabItemWrapper id={id} onClick={tabsItemClick(id, handler)}>
+    {id.toUpperCase()}
+  </ThemesTabItemWrapper>
+);
+ThemesTabItem.displayName = 'ThemesTabItem';
 
 export default ThemesTabItem;

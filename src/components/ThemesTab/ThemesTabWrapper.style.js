@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const ThemesTab = styled.div`
+const ThemesTabWrapper = styled.div`
   display: flex;
   width: 10%;
   height: 100vh;
@@ -9,9 +9,10 @@ const ThemesTab = styled.div`
   align-items: center;
   background-color: ${props => props.theme.regular};
   color: ${props => props.theme.textThemes};
-  > * {
+  > span,
+  > div {
     padding: 15px;
   }
 `;
 
-export default ThemesTab;
+export default ThemesTabWrapper;

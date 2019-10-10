@@ -19,13 +19,11 @@ export const handleSetTheme = {
   }
 };
 
-const enhance = compose(
+export default compose(
   setDisplayName('ThemesTabContainer'),
   connect(
     null,
     mapDispatchToProps
   ),
   withHandlers(handleSetTheme)
-);
-
-export default enhance(ThemesTab);
+)(ThemesTab);

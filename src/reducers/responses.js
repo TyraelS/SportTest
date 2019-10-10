@@ -3,6 +3,8 @@ import { Map, set } from 'immutable';
 export const SET_SPORTS_TIMESTAMP = 'SET_SPORTS_TIMESTAMP';
 export const SET_LEAGUES_TIMESTAMP = 'SET_LEAGUES_TIMESTAMP';
 
+// TODO FIND SOLUTION FOR NOT SETTING TIMESTAMPS BY OWN HANDS
+
 export const setSportsTimestamp = timestamp => {
   return {
     type: SET_SPORTS_TIMESTAMP,
