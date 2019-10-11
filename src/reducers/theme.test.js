@@ -13,6 +13,19 @@ describe('Given the theme reducer', () => {
     it('should return a default theme', () => {
       expect(themeReducer()).toBe('light');
     });
+    describe('and localStorage has theme property', () => {
+      it('should take a value of localStorage and write it to initial state', () => {
+        const localStorageMock = (function() {
+          return {
+            getItem: () => 'dark'
+          };
+        })();
+        Object.defineProperty(window, 'localStorage', {
+          value: localStorageMock
+        });
+        expect(themeReducer()).toBe('dark');
+      });
+    });
   });
   describe('and setTheme action is provided', () => {
     it('should return a theme provided in action payload', () => {
