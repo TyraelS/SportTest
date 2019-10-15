@@ -15,7 +15,7 @@ export const SPORTS_FAILED = 'SPORTS_FAILED';
 
 let sportsTimestampLock = null;
 
-const checkAliveHandler = newTimestamp => () => {
+export const checkAliveHandler = newTimestamp => () => {
   return sportsTimestampLock === newTimestamp;
 };
 

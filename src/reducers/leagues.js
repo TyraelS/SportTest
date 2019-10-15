@@ -10,7 +10,7 @@ export const LEAGUES_FAILED = 'LEAGUES_FAILED';
 
 let leaguesTimestampLock = null;
 
-const checkAliveHandler = newTimestamp => () => {
+export const checkAliveHandler = newTimestamp => () => {
   return leaguesTimestampLock === newTimestamp;
 };
 

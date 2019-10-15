@@ -14,9 +14,7 @@ describe('Given the SideMenuContainer', () => {
   let props = {
     fetchSports: jest.fn(),
     categoryId: null,
-    fetchLeagues: jest.fn(),
-    setSportsTimestamp: jest.fn(),
-    setLeaguesTimestamp: jest.fn()
+    fetchLeagues: jest.fn()
   };
   beforeEach(() => {
     jest.clearAllMocks();
@@ -30,9 +28,7 @@ describe('Given the SideMenuContainer', () => {
     it('should return an object with mapped actions', () => {
       expect(Object.keys(mapDispatchToProps(jest.fn))).toEqual([
         'fetchSports',
-        'fetchLeagues',
-        'setSportsTimestamp',
-        'setLeaguesTimestamp'
+        'fetchLeagues'
       ]);
     });
   });
@@ -62,7 +58,7 @@ describe('Given the SideMenuContainer', () => {
       it('should call setInterval', () => {
         hooks.componentDidMount.call({ props });
         jest.runOnlyPendingTimers();
-        expect(props.setSportsTimestamp).toHaveBeenCalledTimes(2);
+        expect(props.fetchLeagues).toHaveBeenCalledTimes(2);
       });
     });
     describe('when componentWillUnmount is called', () => {
@@ -76,8 +72,7 @@ describe('Given the SideMenuContainer', () => {
   describe('given a handlers const', () => {
     const handlerContext = {
       setCategoryId: jest.fn(),
-      fetchLeagues: jest.fn(),
-      setLeaguesTimestamp: jest.fn()
+      fetchLeagues: jest.fn()
     };
 
     it('should call fetchLeagues in handlers', () => {

@@ -1,6 +1,10 @@
 import { RSAA } from 'redux-api-middleware';
 import { Map, fromJS } from 'immutable';
-import leaguesReducer, { LEAGUES_SUCCESS, fetchLeagues } from './leagues';
+import leaguesReducer, {
+  LEAGUES_SUCCESS,
+  fetchLeagues,
+  checkAliveHandler
+} from './leagues';
 
 describe('Given the fetchLeagues RSAA function', () => {
   describe('and categoryId with timestamp are provided', () => {
@@ -8,6 +12,12 @@ describe('Given the fetchLeagues RSAA function', () => {
       const res = fetchLeagues('1', 1);
       expect(res[RSAA]).toBeTruthy();
     });
+  });
+});
+
+describe('Given the checkAliveHandler function', () => {
+  it('should return result of comparing', () => {
+    expect(checkAliveHandler(null)()).toBe(false);
   });
 });
 
@@ -26,11 +36,12 @@ describe('Given the leaguesReducer', () => {
           {
             id: 'SBTC_01'
           }
-        ],
-        alive: true
+        ]
+      },
+      meta: {
+        checkAlive: jest.fn(() => true)
       }
     };
-
     describe('and payload is still valid', () => {
       it('should return merged state', () => {
         expect(leaguesReducer(Map(), action)).toEqual(
@@ -41,19 +52,34 @@ describe('Given the leaguesReducer', () => {
           })
         );
       });
-
-      describe('and payload is no longer valid', () => {
-        it('should return initial state', () => {
-          action = {
-            ...action,
-            payload: {
-              ...action.payload,
-              alive: false
+    });
+    describe('and checkAlive is not provided in action meta', () => {
+      it('should return provided acction payload', () => {
+        action = {
+          ...action,
+          meta: {}
+        };
+        const mockState = Map({ key: 'value' });
+        expect(leaguesReducer(mockState, action)).toEqual(
+          fromJS({
+            SBTC_01: {
+              id: 'SBTC_01'
             }
-          };
-          const mockState = Map({ test: 'value' });
-          expect(leaguesReducer(mockState, action)).toEqual(mockState);
-        });
+          })
+        );
+      });
+    });
+    describe('and payload is no longer valid', () => {
+      it('should return initial state', () => {
+        action = {
+          ...action,
+          meta: {
+            ...action.meta,
+            checkAlive: jest.fn(() => false)
+          }
+        };
+        const mockState = Map({ test: 'value' });
+        expect(leaguesReducer(mockState, action)).toEqual(mockState);
       });
     });
   });
