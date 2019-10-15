@@ -12,7 +12,6 @@ import { bindActionCreators } from 'redux';
 import SideMenu from './SideMenu';
 import { fetchSports } from 'reducers/sports';
 import { fetchLeagues } from 'reducers/leagues';
-import { setSportsTimestamp, setLeaguesTimestamp } from 'reducers/responses';
 import { generateTimestamp } from 'utils';
 import getSportsWithCounters from 'selectors/getSportsWithCounters';
 
@@ -24,24 +23,14 @@ export const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       fetchSports: fetchSports,
-      fetchLeagues: fetchLeagues,
-      setSportsTimestamp: setSportsTimestamp,
-      setLeaguesTimestamp: setLeaguesTimestamp
+      fetchLeagues: fetchLeagues
     },
     dispatch
   );
 
 export const fetchData = props => {
-  const {
-    fetchSports,
-    categoryId,
-    fetchLeagues,
-    setSportsTimestamp,
-    setLeaguesTimestamp
-  } = props;
+  const { fetchSports, categoryId, fetchLeagues } = props;
   const timestamp = generateTimestamp();
-  setSportsTimestamp(timestamp);
-  setLeaguesTimestamp(timestamp);
   fetchSports(timestamp);
   categoryId && fetchLeagues(categoryId, timestamp);
 };
@@ -51,7 +40,7 @@ export const lifecycles = () => {
     timer: null,
     componentDidMount() {
       fetchData(this.props);
-      this.timer = setInterval(() => fetchData(this.props), 10000);
+      this.timer = setInterval(() => fetchData(this.props), 30000);
     },
     componentWillUnmount() {
       clearInterval(this.timer);
@@ -66,10 +55,8 @@ export const handlers = {
     fetchLeagues,
     setLeaguesTimestamp
   }) => id => {
-    const timestamp = generateTimestamp();
     setCategoryId(id);
-    setLeaguesTimestamp(timestamp);
-    fetchLeagues(id, timestamp);
+    fetchLeagues(id);
   }
 };
 
