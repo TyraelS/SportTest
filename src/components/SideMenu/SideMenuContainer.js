@@ -12,7 +12,6 @@ import { bindActionCreators } from 'redux';
 import SideMenu from './SideMenu';
 import { fetchSports } from 'reducers/sports';
 import { fetchLeagues } from 'reducers/leagues';
-import { generateTimestamp } from 'utils';
 import getSportsWithCounters from 'selectors/getSportsWithCounters';
 
 export const mapStateToProps = state => ({
@@ -30,9 +29,8 @@ export const mapDispatchToProps = dispatch =>
 
 export const fetchData = props => {
   const { fetchSports, categoryId, fetchLeagues } = props;
-  const timestamp = generateTimestamp();
-  fetchSports(timestamp);
-  categoryId && fetchLeagues(categoryId, timestamp);
+  fetchSports();
+  categoryId && fetchLeagues(categoryId);
 };
 
 export const lifecycles = () => {
@@ -50,11 +48,7 @@ export const lifecycles = () => {
 };
 
 export const handlers = {
-  sportItemClick: ({
-    setCategoryId,
-    fetchLeagues,
-    setLeaguesTimestamp
-  }) => id => {
+  sportItemClick: ({ setCategoryId, fetchLeagues }) => id => {
     setCategoryId(id);
     fetchLeagues(id);
   }
