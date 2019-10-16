@@ -1,7 +1,7 @@
 import { Map, fromJS } from 'immutable';
 import { RSAA } from 'redux-api-middleware';
 
-import sportsReducer, { fetchSports } from './sports';
+import sportsReducer, { fetchSports, checkAliveHandler } from './sports';
 
 describe('Given the fetchSports RSAA function', () => {
   describe('and timestamp is provided', () => {
@@ -9,6 +9,12 @@ describe('Given the fetchSports RSAA function', () => {
       const res = fetchSports(1);
       expect(res[RSAA]).toBeTruthy();
     });
+  });
+});
+
+describe('Given the checkAliveHandler function', () => {
+  it('should return result of comparing', () => {
+    expect(checkAliveHandler(null)()).toBe(false);
   });
 });
 
@@ -27,8 +33,10 @@ describe('Given the sportsReducer', () => {
           {
             id: 'SBTC_01'
           }
-        ],
-        alive: true
+        ]
+      },
+      meta: {
+        checkAlive: jest.fn(() => true)
       }
     };
 
@@ -43,13 +51,29 @@ describe('Given the sportsReducer', () => {
         );
       });
 
+      describe('and checkAlive is not provided in action meta', () => {
+        it('should return merged state', () => {
+          action = {
+            ...action,
+            meta: {}
+          };
+          expect(sportsReducer(Map(), action)).toEqual(
+            fromJS({
+              SBTC_01: {
+                id: 'SBTC_01'
+              }
+            })
+          );
+        });
+      });
+
       describe('and action.payload.alive is false', () => {
         it('should return initial state', () => {
           action = {
             ...action,
-            payload: {
-              ...action.payload,
-              alive: false
+            meta: {
+              ...action.meta,
+              checkAlive: jest.fn(() => false)
             }
           };
 

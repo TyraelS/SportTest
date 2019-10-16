@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given the App component when the component is rendered should match the snapshot 1`] = `
+<ThemeProvider
+  theme={
+    Object {
+      "accent": "#bebebe",
+      "leaguesItemBorder": "#000",
+      "leaguesItemEven": "#fff",
+      "leaguesItemOdd": "#eee",
+      "regular": "#cecece",
+      "textLeagues": "#000",
+      "textSports": "#fff",
+      "textThemes": "#000",
+    }
+  }
+>
+  <ForwardRef(styled.div)>
+    <SideMenuContainer />
+    <LeagueTabsContainer />
+    <ThemesTabContainer />
+  </ForwardRef(styled.div)>
+</ThemeProvider>
+`;

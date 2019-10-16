@@ -11,12 +11,17 @@ module.exports = {
     '!src/**/*.mock.js',
     '!src/serviceWorker.js'
   ],
-  coveragePathIgnorePatterns: ['<rootDir>/src/config', '<rootDir>/src/store'],
+  coveragePathIgnorePatterns: [
+    '<rootDir>/src/config',
+    '<rootDir>/src/store',
+    '<rootDir>/src/themes'
+  ],
   setupFiles: ['./shim.js'],
   setupTestFrameworkScriptFile: './jest.setup.js',
   moduleNameMapper: {
     '\\.(eot|otf|webp|svg|ttf|woff|woff2|jpg|jpeg|png)$':
       '<rootDir>/fileMock.js'
   },
-  transformIgnorePatterns: ['node_modules/(?!(redux-api-middleware)/)']
+  transformIgnorePatterns: ['node_modules/(?!(redux-api-middleware)/)'],
+  roots: ['<rootDir>/src/']
 };

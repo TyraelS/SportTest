@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given the ThemesTab component when the component is rendered should match the snapshot 1`] = `
+<ForwardRef(styled.div)>
+  <span>
+    Choose a theme
+  </span>
+  <ThemesTabItem
+    handler={[MockFunction]}
+    id="light"
+    key="light"
+  />
+  <ThemesTabItem
+    handler={[MockFunction]}
+    id="dark"
+    key="dark"
+  />
+</ForwardRef(styled.div)>
+`;

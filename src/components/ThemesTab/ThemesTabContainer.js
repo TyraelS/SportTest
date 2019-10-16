@@ -1,0 +1,29 @@
+import { compose, setDisplayName, withHandlers } from 'recompose';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { setTheme } from 'reducers/theme';
+import ThemesTab from './ThemesTab';
+
+export const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      setTheme: setTheme
+    },
+    dispatch
+  );
+
+export const handlers = {
+  themesTabItemClick: ({ setTheme }) => id => {
+    setTheme(id);
+  }
+};
+
+export default compose(
+  setDisplayName('ThemesTabContainer'),
+  connect(
+    null,
+    mapDispatchToProps
+  ),
+  withHandlers(handlers)
+)(ThemesTab);

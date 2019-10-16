@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 const SideMenuItem = styled.div`
   cursor: pointer;
-  width: 300px;
+  width: 100%;
   height: 50px;
   line-height: 50px;
   text-align: center;
-  color: #fff;
-  ${props =>
-    props.active ? `background-color: #bebebe;` : `background-color: #cecece;`}
+  color: ${props => props.theme.textSports};
+  background-color: ${props =>
+    props.active ? props.theme.accent : props.theme.regular};
 `;
 
 export default SideMenuItem;

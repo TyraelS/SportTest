@@ -12,8 +12,6 @@ import { bindActionCreators } from 'redux';
 import SideMenu from './SideMenu';
 import { fetchSports } from 'reducers/sports';
 import { fetchLeagues } from 'reducers/leagues';
-import { setSportsTimestamp, setLeaguesTimestamp } from 'reducers/responses';
-import { generateTimestamp } from 'utils';
 import getSportsWithCounters from 'selectors/getSportsWithCounters';
 
 export const mapStateToProps = state => ({
@@ -24,52 +22,35 @@ export const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       fetchSports: fetchSports,
-      fetchLeagues: fetchLeagues,
-      setSportsTimestamp: setSportsTimestamp,
-      setLeaguesTimestamp: setLeaguesTimestamp
+      fetchLeagues: fetchLeagues
     },
     dispatch
   );
 
 export const fetchData = props => {
-  const {
-    fetchSports,
-    categoryId,
-    fetchLeagues,
-    setSportsTimestamp,
-    setLeaguesTimestamp
-  } = props;
-  const timestamp = generateTimestamp();
-  setSportsTimestamp(timestamp);
-  setLeaguesTimestamp(timestamp);
-  fetchSports(timestamp);
-  categoryId && fetchLeagues(categoryId, timestamp);
+  const { fetchSports, categoryId, fetchLeagues } = props;
+  fetchSports();
+  categoryId && fetchLeagues(categoryId);
 };
 
 export const lifecycles = () => {
-  let timer = null;
   return {
+    timer: null,
     componentDidMount() {
       fetchData(this.props);
-      timer = setInterval(() => fetchData(this.props), 10000);
+      this.timer = setInterval(() => fetchData(this.props), 30000);
     },
     componentWillUnmount() {
-      clearInterval(timer);
-      timer = null;
+      clearInterval(this.timer);
+      this.timer = null;
     }
   };
 };
 
 export const handlers = {
-  sportItemClick: ({
-    setCategoryId,
-    fetchLeagues,
-    setLeaguesTimestamp
-  }) => id => {
-    const timestamp = generateTimestamp();
+  sportItemClick: ({ setCategoryId, fetchLeagues }) => id => {
     setCategoryId(id);
-    setLeaguesTimestamp(timestamp);
-    fetchLeagues(id, timestamp);
+    fetchLeagues(id);
   }
 };
 
